@@ -18,3 +18,4 @@
 # R working files
 *.Rhistory
 *.Rproj
+*.RData
