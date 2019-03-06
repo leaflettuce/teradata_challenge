@@ -13,3 +13,8 @@
 *.twb
 *.twbr
 
+.Rproj.user
+
+# R working files
+*.Rhistory
+*.Rproj
