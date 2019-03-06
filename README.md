@@ -21,6 +21,8 @@ Solving business problems for Hire Heroes USA. Conducted as part of SNHU hosted 
 ## Loading Data
 ```
 (1) Upload Hire Heroes supplied datasets into _/data/raw/_ 
+	|--> requires teradata challenge credentials to source data
+	|--> manually download all files from challenge dataset page
 	|--> save all csv's directly in this dir, no further pathing
 
 (2) RUN (data processing script here)
