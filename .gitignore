@@ -1,0 +1,15 @@
+
+# data files
+/data/*
+*.csv
+*.xlsx
+
+# imgs for reports
+/reports/visuals/*
+*.png
+
+# tableau files
+/reports/dashboards/*
+*.twb
+*.twbr
+
