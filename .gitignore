@@ -22,3 +22,4 @@
 
 # allow data dictionaries
 !_data_dictionary.xlsx
+!_data_model.png

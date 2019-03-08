@@ -26,17 +26,3 @@ summary(df_contact$Id)
 # merge hire and contact df's
 df_hire_contact_join <- left_join(df_contact, df_hire, by = c("Id" = "Client_Name__c"))
 
-# explore hire dataset
-summary(df_hire$Salary_Range__c)
-plot(df_hire$Salary_Range__c) 
-hist(df_hire$Months_Unemployed__c, breaks = 20)
-
-# contact
-summary(df_contact$Last_Rank__c)
-summary(df_contact$Start_Date__c)
-names(df_contact)
-
-# accounts
-names(df_accounts)
-summary(df_accounts$Vet_Placement__c)
-summary(df_accounts$BillingState)
