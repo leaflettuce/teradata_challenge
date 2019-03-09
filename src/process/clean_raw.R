@@ -209,3 +209,17 @@ df_epo_board$company %in% df_epo_emp$name
 
 # test merge
 # df_hire_contact_join <- left_join(df_contact, df_hire, by = c("Id" = "Client_Name__c"))
+
+
+#############
+# Set Types #
+#############
+# more defined types
+df_epo_board$transaction_price <- as.numeric(gsub( "\\$", "", df_epo_board$transaction_price))
+
+
+
+#######################
+# Print out new files #
+#######################
+
