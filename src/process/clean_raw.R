@@ -214,12 +214,167 @@ df_epo_board$company %in% df_epo_emp$name
 #############
 # Set Types #
 #############
-# more defined types
+
+
+#### FROM M. BECKNER
+fctrs <- c(4,6,11,40,41,43,47,51,65,68:70,77,81,82)
+df_campaign[,fctrs] <- lapply(df_campaign[,fctrs] , factor)
+df_campaign[,54] <- toString(df_campaign[,54])
+
+df_epo_seeker[,3] <- as.factor(df_epo_seeker[,3])
+
+fctrs <- c(5,8)
+df_epo_board[,fctrs] <- lapply(df_epo_board[,fctrs] , factor)
+
+
+fctrs <- c(8,10:12,14:32,37:39,42:55)
+df_feedback[,fctrs] <- lapply(df_feedback[,fctrs] , factor)
+
+fctrs <- c(6,7,10,23:26,30:32,34,37,38)
+df_activities[,fctrs] <- lapply(df_activities[,fctrs] , factor)
+
+fctrs <- c(2,5,7,15,19:22,29:32,36:39,41,43,44,61,63,64,66,67,69,70,73,74,76:78,92,96,97,100,106:109,111,113,114,116:118,121)
+df_accounts[,fctrs] <- lapply(df_accounts[,fctrs] , factor)
+
+fctrs <- c(6,8:13,16,23:25,27,32:34,36,38,39)
+df_cases[,fctrs] <- lapply(df_cases[,fctrs] , factor)
+
+fctrs <- c(4,6,9,10,17:24,27,28,30,32,35,36,38,40:42,45:49,52:56,60,61,65,67,68,74:76,78,82,84,89:92,95:104,106,108,109,113:115,118,120,121,126,129,132,133,136,140,141,143,144,148,149,151,152,156:158,160,164,166:170,173,175,180,182,183,185,186,
+           188:190,193:195,202,203,205,206,209,210,212,217,220,224,225,227,228,231,233,234,243,245,246,250,251,253,254,257:263,265,269,271,273:275,277:281,284,285,289,291:295,297:300,305:309,312,315,316,318,320,321,323,325:327,330,336:341,348,351,353,357,360,361)
+df_contact[,fctrs] <- lapply(df_contact[,fctrs] , factor) 
+
+fctrs <- c(14,15,18:23,25,26,29,30,32)
+df_hire[,fctrs] <- lapply(df_hire[,fctrs] , factor)
+
+fctrs <- c(4,7,11:16,18,29,30,32:38,40,42,47,55,56,58,62:67,79,81:83,85:87,93,94,96,100,105:108,110:112)
+df_opportunity[,fctrs] <- lapply(df_opportunity[,fctrs] , factor)
+
+fctrs <- c(5,6)
+df_type[,fctrs] <- lapply(df_type[,fctrs] , factor)
+
+fctrs <- c(3,9,11,13,14,19:21)
+df_email[,fctrs] <- lapply(df_email[,fctrs] , factor)
+
+# END M BECKNER
+
+#################
+# more cleaning #
+#################
+
+# Accounts
+
+# activities
+fctrs <- c(8, 12, 20, 22, 33, 35, 36, 42:44)
+df_activities[,fctrs] <- lapply(df_activities[,fctrs] , factor)
+ # <------------------------THOUGHTS? SHould these be T/F values be logical or factor types?
+
+# campaign
+
+# cases
+
+# contact
+df_contact$MailingPostalCode <- as.factor(df_contact$MailingPostalCode)
+
+df_contact$Mileage_Willing_To_Commute__c <- as.factor(gsub( "< ", "", df_contact$Mileage_Willing_To_Commute__c))
+df_contact$Mileage_Willing_To_Commute__c <- factor(df_contact$Mileage_Willing_To_Commute__c, 
+                                              levels = c("10 Miles", "20 Miles", "30 Miles",
+                                                         "40 Miles", "50 Miles", "100 Miles"))
+
+df_contact$Military_Occupation__c <- as.factor(df_contact$Military_Occupation__c)
+
+df_contact$Disability_Rating__c <- factor(df_contact$Disability_Rating__c, 
+                                                   levels = c("Not Disabled", "Pending", "10%", 
+                                                              "20%", "30%", "40%", "50%", "60%",
+                                                              "70%", "80%", "90%", "100%"))
+df_contact$Program_Enrollments__c <- as.integer(df_contact$Program_Enrollments__c)
+
+df_contact$Desired_Industry_for_Employment__c <- as.factor(df_contact$Desired_Industry_for_Employment__c)
+
+# email
+
+# epo board
 df_epo_board$transaction_price <- as.numeric(gsub( "\\$", "", df_epo_board$transaction_price))
 
+# epo emp
+
+# epo seeker
+
+# feedback
+df_feedback$Survey_Name__c <- as.factor(df_feedback$Survey_Name__c)
+
+df_feedback$Salary_Change__c <- as.factor(df_feedback$Salary_Change__c)
+
+df_feedback$Unemployment_length_after_registration__c <- factor(df_feedback$Unemployment_length_after_registration__c, 
+                                          levels = c("< 1", "1", "2", "3", "4", "5", "6", "7", 
+                                                     "8", "9", "10", "11", "12", "13", "14", "15", "16",
+                                                     "17", "18", "20", "21", "22", "23", "24", "> 24"))
+
+# hire
+
+# opportunity
+df_opportunity$FiscalYear <- as.factor(df_opportunity$FiscalYear)
+
+df_opportunity$stayclassy__Raw_Donation_Net_Amount__c <-NULL
+# ^^ missed in nulls due to logical type
+
+# type
+
+##########################
+# ADD MORE CLEANING HERE #  <------------------------------ !!!!
+##########################
 
 
 #######################
 # Print out new files #
 #######################
+
+# account
+print("writing accounts csv...")
+write.csv(df_accounts, "../../data/interim/accounts.csv")
+
+# activites
+print("writing activities csv...")
+write.csv(df_activities, "../../data/interim/activities.csv")
+
+# campaign
+print("writing campaign csv...")
+write.csv(df_campaign, "../../data/interim/campaign.csv")
+
+# cases
+print("writing cases csv...")
+write.csv(df_cases, "../../data/interim/case.csv")
+
+# contact
+print("writing contacts csv...")
+write.csv(df_contact, "../../data/interim/contacts.csv")
+
+# email
+print("writing email csv...")
+write.csv(df_email, "../../data/interim/emails.csv")
+
+# epo board
+print("writing EPO csvs...")
+write.csv(df_epo_board, "../../data/interim/epo_job_board.csv")
+
+# epo emp
+write.csv(df_epo_emp, "../../data/interim/epo_employers.csv")
+
+# epo seeker
+write.csv(df_epo_seeker, "../../data/interim/epo_seekers.csv")
+
+# feedback
+print("writing feedback csv...")
+write.csv(df_feedback, "../../data/interim/feedback.csv")
+
+# hire
+print("writing hiring csv...")
+write.csv(df_hire, "../../data/interim/hiring.csv")
+
+# oppo
+print("writing opportunities csv...")
+write.csv(df_opportunity, "../../data/interim/opportunities.csv")
+
+# type
+print("writing record types csv...")
+write.csv(df_type, "../../data/interim/record_types.csv")
 
