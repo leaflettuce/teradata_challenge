@@ -39,7 +39,7 @@ df_campaign <- read.csv("../../data/raw/Campaign.csv", stringsAsFactors=FALSE)
 dates <- c(8:9,38,40,42:43,81,83,91)
 df_campaign[,dates] <- lapply(df_campaign[,dates] , mdy_hm)
 IDStoChar <- c(63,68,72,75,76,77,78,79)
-df_campaign[,IDStoChar] <- lapply(df_campaign[,IDStoChar] , toString)
+df_campaign[,IDStoChar] <- lapply(df_campaign[,IDStoChar] , as.character)
 df_campaign <- df_campaign[,c(1,3:10,14:16,19:24,27:34,37:43,45:49,51:55,58:59,61:81,83:84,86,89:103)]
 
 # EPO employer
@@ -55,14 +55,13 @@ df_epo_seeker[,dates] <- lapply(df_epo_seeker[,dates] , ymd_hms)
 df_epo_board <- read.csv("../../data/raw/EPO_Teradata_Job_Board_Sales_Report.csv", stringsAsFactors=FALSE)
 df_epo_board[,2] <- ymd_hms(df_epo_board[,2])
 IDStoChar <- c(1,4)
-df_epo_board[,IDStoChar] <- lapply(df_epo_board[,IDStoChar] , toString)
+df_epo_board[,IDStoChar] <- lapply(df_epo_board[,IDStoChar] , as.character)
 
 # feedback
 df_feedback <- read.csv("../../data/raw/Feedback__c.csv", stringsAsFactors=FALSE)
 dates <- c(5,7,9,37)
 df_feedback[,dates] <- lapply(df_feedback[,dates] , mdy_hm)
-IDStoChar <- c(4,19)
-df_feedback[,IDStoChar] <- lapply(df_feedback[,IDStoChar] , toString)
+df_feedback$Name <- as.character(df_feedback$Name)
 df_feedback <- df_feedback[,c(1:2,4:5,7:9,11,13:46,48:49,52:54,60,64:70)]
 
 # Activities
@@ -77,14 +76,14 @@ df_accounts <- read.csv("../../data/raw/SalesForce_Account.csv", stringsAsFactor
 dates <- c(11,13,15:16,18,38,41,45:46,51:52,58,60,72,75,84,88,94:95,141,145,167)
 df_accounts[,dates] <- lapply(df_accounts[,dates] , mdy_hm)
 IDStoChar <- c(57,118,130)
-df_accounts[,IDStoChar] <- lapply(df_accounts[,IDStoChar] , toString)
+df_accounts[,IDStoChar] <- lapply(df_accounts[,IDStoChar] , as.character)
 df_accounts <- df_accounts[,c(1,4:20,22:23,25:27,29:39,41:60,65,68,70:88,90:102,104,117:118,122:128,130,132,141:143,145,150:157,159:160,162:168)]
 
 # cases
 df_cases <- read.csv("../../data/raw/SalesForce_Case.csv", stringsAsFactors=FALSE)
 dates <- c(17,24,26,28,30,39,41,49,55)
 df_cases[,dates] <- lapply(df_cases[,dates] , mdy_hm)
-df_cases[,3] <- toString(df_cases[,3])
+df_cases$CaseNumber <- as.character(df_cases$CaseNumber)
 df_cases <- df_cases[,c(1,3:6,9:17,21:22,24:28,30:31,35:41,45:49,51:56)]
 
 # contact
@@ -92,14 +91,14 @@ df_contact <- read.csv("../../data/raw/SalesForce_Contact.csv", stringsAsFactors
 dates <- c(13,15,17:18,31,35,42,47,61,69,75,88:91,115:117,125,128,130:131,135,137:138,141,147,154,163,165,171,173,191,195,201,205,209,223,228,234,240,249,262:267,275:276,279,294:296,300,312,331:332,339,342,346,348,357:358,360,373,378,388)
 df_contact[,dates] <- lapply(df_contact[,dates] , mdy_hm)
 IDStoChar <- c(146,192:193)
-df_contact[,IDStoChar] <- lapply(df_contact[,IDStoChar] , toString)
+df_contact[,IDStoChar] <- lapply(df_contact[,IDStoChar] , as.character)
 df_contact <- df_contact[,c(1:9,11,13:39,41:91,93:113,115:119,121:132,134:142,144:147,149:156,158:165,168:181,184:185,187:193,195:198,200:201,203:209,213,216:217,221,223:289,291:303,305:389,391)]
 
 # hire
 df_hire <- read.csv("../../data/raw/SalesForce_Hire_Information__c.csv", stringsAsFactors=FALSE)
 dates <- c(4,6,8,10:11,29,33)
 df_hire[,dates] <- lapply(df_hire[,dates] , mdy_hm)
-df_hire[,3] <- toString(df_hire[,3])
+df_hire$Name <- as.character(df_hire$Name)
 df_hire <- df_hire[,c(1,3:8,10:34)]
 
 # opportunity
@@ -107,7 +106,7 @@ df_opportunity <- read.csv("../../data/raw/SalesForce_Opportunity.csv", stringsA
 dates <- c(12,24,26,28:30,34,46,53:55,64,83:84,97,126)
 df_opportunity[,dates] <- lapply(df_opportunity[,dates] , mdy_hm)
 IDStoChar <- c(31,85,105:109)
-df_opportunity[,IDStoChar] <- lapply(df_opportunity[,IDStoChar] , toString)
+df_opportunity[,IDStoChar] <- lapply(df_opportunity[,IDStoChar] , as.character)
 df_opportunity <- df_opportunity[,c(1,3:4,6:13,15:38,40,44:47,51:71,75:98,103:130)]
 
 # type
@@ -120,8 +119,7 @@ df_type <- df_type[,c(1:2,4:12)]
 df_email <- read.csv("../../data/raw/vr__VR_Email_History_Contact__c.csv", stringsAsFactors=FALSE)
 dates <- c(5,7,9,16)
 df_email[,dates] <- lapply(df_email[,dates] , ymd_hms)
-IDStoChar <- c(13)
-df_email[,13] <- toString(df_email[,13])
+df_email$vr__Email_ID__c <- as.character(df_email$vr__Email_ID__c)
 df_email <- df_email[,c(1:2,4:22)]
 
 
@@ -140,6 +138,7 @@ df_campaign[[1]] %in% df_activities[[4]]
 ##########################################################################################
 # Print the details of each dataframe
 ##########################################################################################
+'''
 str(df_campaign, list.len=ncol(df_campaign))
 summary(df_campaign)
 
@@ -178,7 +177,7 @@ summary(df_type)
 
 str(df_email)
 summary(df_email)
-
+'''
 #####################################################
 ########## END CODE FROM M. Beckner #################
 #####################################################
@@ -323,6 +322,43 @@ df_opportunity$stayclassy__Raw_Donation_Net_Amount__c <-NULL
 # ADD MORE CLEANING HERE #  <------------------------------ !!!!
 ##########################
 
+#accounts
+for (i in 1:nrow(df_accounts)){
+  if(df_accounts[i,34]!=""){
+    df_accounts[i,34] <- paste("01-", df_accounts[i,34], sep = "")
+  }
+}
+
+for (i in 1:nrow(df_accounts)){
+  if(df_accounts[i,95]!=""){
+    df_accounts[i,95] <- paste("01-", df_accounts[i,95], sep = "")
+  }
+}
+
+dates <- c(34,95)
+df_accounts[,dates] <- lapply(df_accounts[,dates] , dmy)
+
+#campaign
+df_campaign <- separate(df_campaign, 42, c("Program_Location_City", "Program_Location_State"), sep = ",", remove = TRUE) 
+df_campaign$Program_Location_State <- as.factor(df_campaign$Program_Location_State)
+
+#contact
+dates <- c(34,171)
+df_contact[,dates] <- lapply(df_contact[,dates] , mdy)
+
+#feedback
+df_feedback$Length_with_current_employer__c <- as.factor(df_feedback$Length_with_current_employer__c)
+
+
+###############################
+#######33 DO THIS #############
+###############################
+summary(df_contact$Security_Clearance_Description__c) # cut dates out and replace with yet
+summary(df_contact$Languages_Spoken__c) # clean
+summary(df_contact$Job_Type__c) # split/clean
+summary(df_contact$Desired_State_of_Employment__c) # Clean
+summary(df_contact$Min_Salary_Expectations__c) # NORMALIZE OR SPLIT
+
 
 #######################
 # Print out new files #
@@ -332,7 +368,7 @@ df_opportunity$stayclassy__Raw_Donation_Net_Amount__c <-NULL
 print("writing accounts csv...")
 write.csv(df_accounts, "../../data/interim/accounts.csv")
 
-# activites
+# activites !
 print("writing activities csv...")
 write.csv(df_activities, "../../data/interim/activities.csv")
 
@@ -344,11 +380,11 @@ write.csv(df_campaign, "../../data/interim/campaign.csv")
 print("writing cases csv...")
 write.csv(df_cases, "../../data/interim/case.csv")
 
-# contact
+# contact !
 print("writing contacts csv...")
 write.csv(df_contact, "../../data/interim/contacts.csv")
 
-# email
+# email !
 print("writing email csv...")
 write.csv(df_email, "../../data/interim/emails.csv")
 

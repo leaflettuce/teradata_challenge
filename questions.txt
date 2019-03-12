@@ -15,7 +15,7 @@ Q: Is there a way to tell what communication method (call, texting or email) is 
 
     What about with regards to completed Volunteer Requests?
 
-Q: Is there anything in the client's demographic profile that indicates that a client is more likely to become a confirmed hire or any other outcome?
+Q: Is there anything in the client's demographic profile that indicates that a client is more likely to become a confirmed hire or any other outcome?    // <---- THIS
       // descriptive, cluster, log regression 
 
 Context: All of our contact records have Created Dates signifying when they first entered into the Hire Heroes USA system, but all clients have a Client Type and Client Category. These individuals are also identified with 
@@ -28,7 +28,7 @@ Veteran Registrants) were not selected for assignment and were sent messaging en
 
 Volunteer Program (4)
  
-Q:  What can we prove - quantitatively - that our volunteers are increasing the overall effectiveness of our program?   
+Q:  What can we prove - quantitatively - that our volunteers are increasing the overall effectiveness of our program?   // <---- THIS
 
     Does working with a volunteer raise the probability of a client getting hired or getting hire sooner? 
     Are there certain Mentoring activities that are more effective than others (based on Requested Support field)? 
