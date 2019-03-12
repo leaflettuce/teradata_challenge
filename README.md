@@ -1,5 +1,5 @@
 # 2019 Teradata Challenge
-Solving business problems for Hire Heroes USA. Conducted as part of SNHU hosted team.
+Competing in the 2019 TUN data challenge by solving business problems for Hire Heroes USA. Conducted as part of SNHU hosted team.
 
 ## Goals
 
@@ -25,5 +25,5 @@ Solving business problems for Hire Heroes USA. Conducted as part of SNHU hosted 
 	|--> manually download all files from challenge dataset page
 	|--> save all csv's directly in this dir, no further pathing
 
-(2) RUN (data processing script here)
+(2) RUN (add data processing script here when gtg)
 ```
