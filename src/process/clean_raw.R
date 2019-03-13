@@ -355,6 +355,44 @@ df_feedback$Length_with_current_employer__c <- as.factor(df_feedback$Length_with
 ###############################
 summary(df_contact$Security_Clearance_Description__c) # cut dates out and replace with yet
 
+clean_clearance <- function(x) {
+  if (grepl('no', tolower(x))) {
+    'None'
+  }
+  else if (grepl('yes', tolower(x))){
+    'Yes - not specified'
+  }
+  else if (grepl('inactive', tolower(x))){
+    'Inactive'
+  }
+  else if (grepl('top secret', tolower(x))){
+    'Top Secret'
+  }
+  else if (grepl('sbi/sci', tolower(x))){
+    'Top Secret'
+  }
+  else if (grepl('secret', tolower(x))){
+    'secret'
+  }
+  else if (grepl('confidential', tolower(x))){
+    'Confidential'
+  }
+  else if (grepl('yes', tolower(x))){
+    'Yes - not specified'
+  }
+  else if ((nchar(x) > 1) & (!is.na(x))) { 
+    'Yes - not specified'
+  }
+  else {
+    'None'
+  }
+}
+
+df_contact$Security_Clearance_Description__c <- lapply(as.character(df_contact$Security_Clearance_Description__c), 
+                                                       clean_clearance)
+df_contact$Security_Clearance_Description__c <- as.factor(unlist(df_contact$Security_Clearance_Description__c))
+
+
 # clean languages
 summary(df_contact$Languages_Spoken__c) # clean
 
@@ -413,9 +451,32 @@ clean_language <- function(x) {
 df_contact$Languages_Spoken__c <- lapply(as.character(df_contact$Languages_Spoken__c), clean_language)
 df_contact$Languages_Spoken__c <- as.factor(unlist(df_contact$Languages_Spoken__c))
 
-
+# job type
 summary(df_contact$Job_Type__c) # split/clean
+
+df_contact$Job_Type_Full_Time <- lapply(df_contact$Job_Type__c, 
+                                        function(x) {ifelse(grepl('Full-Time', x), 1, 0)})
+df_contact$Job_Type_Full_Time <- as.factor(unlist(df_contact$Job_Type_Full_Time))
+
+df_contact$Job_Type_Part_Time <- lapply(df_contact$Job_Type__c, 
+                                        function(x) {ifelse(grepl('Part-Time', x), 1, 0)})
+df_contact$Job_Type_Part_Time <- as.factor(unlist(df_contact$Job_Type_Part_Time))
+
+df_contact$Job_Type_Contract <- lapply(df_contact$Job_Type__c, 
+                                        function(x) {ifelse(grepl('Contract', x), 1, 0)})
+df_contact$Job_Type_Contract <- as.factor(unlist(df_contact$Job_Type_Contract))
+
+df_contact$Job_Type_Temp <- lapply(df_contact$Job_Type__c, 
+                                        function(x) {ifelse(grepl('Temporary', x), 1, 0)})
+df_contact$Job_Type_Temp <- as.factor(unlist(df_contact$Job_Type_Temp))
+
+df_contact$Job_Type_Fed <- lapply(df_contact$Job_Type__c, 
+                                   function(x) {ifelse(grepl('Federal', x), 1, 0)})
+df_contact$Job_Type_Fed <- as.factor(unlist(df_contact$Job_Type_Fed))
+
+# State of emp
 summary(df_contact$Desired_State_of_Employment__c) # Clean
+
 summary(df_contact$Min_Salary_Expectations__c) # NORMALIZE OR SPLIT
 
 
