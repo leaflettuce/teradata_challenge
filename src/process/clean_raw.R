@@ -354,11 +354,318 @@ df_feedback$Length_with_current_employer__c <- as.factor(df_feedback$Length_with
 #######33 DO THIS #############
 ###############################
 summary(df_contact$Security_Clearance_Description__c) # cut dates out and replace with yet
+
+clean_clearance <- function(x) {
+  if (grepl('no', tolower(x))) {
+    'None'
+  }
+  else if (grepl('yes', tolower(x))){
+    'Yes - not specified'
+  }
+  else if (grepl('inactive', tolower(x))){
+    'Inactive'
+  }
+  else if (grepl('top secret', tolower(x))){
+    'Top Secret'
+  }
+  else if (grepl('sbi/sci', tolower(x))){
+    'Top Secret'
+  }
+  else if (grepl('secret', tolower(x))){
+    'secret'
+  }
+  else if (grepl('confidential', tolower(x))){
+    'Confidential'
+  }
+  else if (grepl('yes', tolower(x))){
+    'Yes - not specified'
+  }
+  else if ((nchar(x) > 1) & (!is.na(x))) { 
+    'Yes - not specified'
+  }
+  else {
+    'None'
+  }
+}
+
+df_contact$Security_Clearance_Description__c <- lapply(as.character(df_contact$Security_Clearance_Description__c), 
+                                                       clean_clearance)
+df_contact$Security_Clearance_Description__c <- as.factor(unlist(df_contact$Security_Clearance_Description__c))
+
+
+# clean languages
 summary(df_contact$Languages_Spoken__c) # clean
+
+clean_language <- function(x) {
+  if (grepl('english', tolower(x)) & grepl('spanish', tolower(x)))
+ {
+    'English and Spanish'
+  }
+  else if (grepl('german', tolower(x))) {
+    'German'
+  }
+  else if (grepl('spanish', tolower(x))) {
+    'Spanish'
+  }
+  else if (grepl('arabic', tolower(x))) {
+    'Arabic'
+  }
+  else if (grepl('tagalog', tolower(x))) {
+    'Tagalog'
+  }
+  else if (grepl('korean', tolower(x))) {
+    'Korean'
+  }
+  else if (grepl('french', tolower(x))) {
+    'French'
+  }
+  else if (grepl('russian', tolower(x))) {
+    'Russian'
+  }
+  else if (grepl('vietnamese', tolower(x))) {
+    'Vietnamese'
+  }
+  else if (grepl('chinese', tolower(x))) {
+    'Chinese'
+  }
+  else if (grepl('italian', tolower(x))) {
+    'Italian'
+  }
+  else if (grepl('japanese', tolower(x))) {
+    'Japanese'
+  }
+  else if (grepl('english', tolower(x))) {
+    'English'
+  }
+  else if (grepl('none', tolower(x)) | (grepl('na', tolower(x)))) {
+    'na'
+  }
+  else if ((nchar(x) > 1) & (!is.na(x))) {
+    'Other'
+  }
+  else {
+    'na'
+  }
+}
+
+df_contact$Languages_Spoken__c <- lapply(as.character(df_contact$Languages_Spoken__c), clean_language)
+df_contact$Languages_Spoken__c <- as.factor(unlist(df_contact$Languages_Spoken__c))
+
+# job type
 summary(df_contact$Job_Type__c) # split/clean
+
+df_contact$Job_Type_Full_Time <- lapply(df_contact$Job_Type__c, 
+                                        function(x) {ifelse(grepl('Full-Time', x), 1, 0)})
+df_contact$Job_Type_Full_Time <- as.factor(unlist(df_contact$Job_Type_Full_Time))
+
+df_contact$Job_Type_Part_Time <- lapply(df_contact$Job_Type__c, 
+                                        function(x) {ifelse(grepl('Part-Time', x), 1, 0)})
+df_contact$Job_Type_Part_Time <- as.factor(unlist(df_contact$Job_Type_Part_Time))
+
+df_contact$Job_Type_Contract <- lapply(df_contact$Job_Type__c, 
+                                        function(x) {ifelse(grepl('Contract', x), 1, 0)})
+df_contact$Job_Type_Contract <- as.factor(unlist(df_contact$Job_Type_Contract))
+
+df_contact$Job_Type_Temp <- lapply(df_contact$Job_Type__c, 
+                                        function(x) {ifelse(grepl('Temporary', x), 1, 0)})
+df_contact$Job_Type_Temp <- as.factor(unlist(df_contact$Job_Type_Temp))
+
+df_contact$Job_Type_Fed <- lapply(df_contact$Job_Type__c, 
+                                   function(x) {ifelse(grepl('Federal', x), 1, 0)})
+df_contact$Job_Type_Fed <- as.factor(unlist(df_contact$Job_Type_Fed))
+
+# State of emp
 summary(df_contact$Desired_State_of_Employment__c) # Clean
+
+clean_states <- function(x) {
+  if (grepl('BA', toupper(x))) {
+    'na'
+  }
+  else if (grepl('HA', toupper(x))) {
+    'HI'
+  }
+  else if (grepl('LV', toupper(x))) {
+    'LA'
+  }
+  else if (grepl('NB', toupper(x))) {
+    'NC'
+  }
+  else if (grepl('HA', toupper(x))) {
+    'HI'
+  }
+  else if (grepl('PI', toupper(x))) {
+    'RI'
+  }
+  else if (grepl('PR', toupper(x))) {
+    'PA'
+  }
+  else if (grepl('GU', toupper(x))) {
+    'GA'
+  }
+  else if (grepl('NA', toupper(x))) {
+    'na'
+  }
+  else if ((nchar(x) == 2) & (!is.na(x))) {
+    toupper(x)
+  }
+  else if (grepl('california', tolower(x))) {
+    'CA'
+  }
+  else if (grepl('texas', tolower(x))) {
+    'TX'
+  }
+  else if (grepl('florida', tolower(x))) {
+    'FL'
+  }
+  else if (grepl('colorado', tolower(x))) {
+    'CO'
+  }
+  else if (grepl('georgia', tolower(x))) {
+    'GA'
+  }
+  else if (grepl('north carolina', tolower(x))) {
+    'NC'
+  }
+  else if (grepl('virginia', tolower(x))) {
+    'VA'
+  }
+  else if (grepl('new york', tolower(x))) {
+    'NY'
+  }
+  else if (grepl('washington', tolower(x))) {
+    'WA'
+  }
+  else if (grepl('arizona', tolower(x))) {
+    'AZ'
+  }
+  else if (grepl('south carolina', tolower(x))) {
+    'SC'
+  }
+  else if (grepl('maryland', tolower(x))) {
+    'MD'
+  }
+  else if (grepl('michigan', tolower(x))) {
+    'MI'
+  }
+  else if (grepl('alabama', tolower(x))) {
+    'AL'
+  }
+  else if (grepl('illinois', tolower(x))) {
+    'IL'
+  }
+  else if (grepl('indiana', tolower(x))) {
+    'IN'
+  }
+  else if (grepl('jersey', tolower(x))) {
+    'NJ'
+  }
+  else if (grepl('Missouri', tolower(x))) {
+    'MO'
+  }
+  else if (grepl('penn', tolower(x))) {
+    'PA'
+  }
+  else if (grepl('tenn', tolower(x))) {
+    'TN'
+  }
+  else if (grepl('hawaii', tolower(x))) {
+    'HI'
+  }
+  else if (grepl('louis', tolower(x))) {
+    'LA'
+  }
+  else if (grepl('okla', tolower(x))) {
+    'OK'
+  }
+  else if (grepl('nevada', tolower(x))) {
+    'NV'
+  }
+  else if (grepl('oregon', tolower(x))) {
+    'OR'
+  }
+  else if (grepl('kent', tolower(x))) {
+    'KY'
+  }
+  else if (grepl('wisc', tolower(x))) {
+    'WI'
+  }
+  else if (grepl('minne', tolower(x))) {
+    'MN'
+  }
+  else if (grepl('utah', tolower(x))) {
+    'UT'
+  }
+  else if (grepl('alaska', tolower(x))) {
+    'AK'
+  }
+  else if (grepl('district', tolower(x))) {
+    'DC'
+  }
+  else if (grepl('delaware', tolower(x))) {
+    'DE'
+  }
+  else if (grepl('mass', tolower(x))) {
+    'MA'
+  }
+  else {
+    'na'
+  }
+}
+
+df_contact$Desired_State_of_Employment__c <- lapply(as.character(df_contact$Desired_State_of_Employment__c), clean_states)
+df_contact$Desired_State_of_Employment__c <- as.factor(unlist(df_contact$Desired_State_of_Employment__c))
+
+
+# Salary
 summary(df_contact$Min_Salary_Expectations__c) # NORMALIZE OR SPLIT
 
+# set type
+df_contact$Salary_expectation_type <- lapply(df_contact$Min_Salary_Expectations__c, 
+                                             function(x) {
+                                               if (grepl('hr', x)){ 
+                                               'hourly'
+                                                 }
+                                                else if (nchar(as.character(x)) > 1) {
+                                                  'annually'
+                                                }
+                                               else {
+                                                 'na'
+                                               }
+                                             })
+df_contact$Salary_expectation_type <- as.factor(unlist(df_contact$Salary_expectation_type))
+
+# annually
+df_contact$Salary_annual_expected <- lapply(df_contact$Min_Salary_Expectations__c, 
+                                            function(x) {
+                                              if (grepl('hr', x)){ 
+                                                'na'
+                                              }
+                                              else if (nchar(as.character(x)) > 1) {
+                                                gsub( "\\$", "", as.character(x))
+                                              }
+                                              else {
+                                                'na'
+                                              }
+                                            })
+df_contact$Salary_annual_expected <- lapply(df_contact$Salary_annual_expected, function(x) {substr(x, 1, 6)})
+df_contact$Salary_annual_expected<- lapply(df_contact$Salary_annual_expected, function(x) {gsub(",", "", x)})
+df_contact$Salary_annual_expected <- as.integer(df_contact$Salary_annual_expected)
+
+# hourly
+df_contact$Salary_hourly_expected <- lapply(df_contact$Min_Salary_Expectations__c, 
+                                            function(x) {
+                                              if (grepl('hr', x)){ 
+                                                gsub( "\\$", "", as.character(x))
+                                              }
+                                              else if (nchar(as.character(x)) > 1) {
+                                                'na'
+                                              }
+                                              else {
+                                                'na'
+                                              }
+                                            })
+df_contact$Salary_hourly_expected <- lapply(df_contact$Salary_hourly_expected, function(x) {substr(x, 1, 2)})
+df_contact$Salary_hourly_expected <- as.integer(df_contact$Salary_hourly_expected)
 
 #######################
 # Print out new files #
