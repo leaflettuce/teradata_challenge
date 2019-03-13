@@ -477,8 +477,195 @@ df_contact$Job_Type_Fed <- as.factor(unlist(df_contact$Job_Type_Fed))
 # State of emp
 summary(df_contact$Desired_State_of_Employment__c) # Clean
 
+clean_states <- function(x) {
+  if (grepl('BA', toupper(x))) {
+    'na'
+  }
+  else if (grepl('HA', toupper(x))) {
+    'HI'
+  }
+  else if (grepl('LV', toupper(x))) {
+    'LA'
+  }
+  else if (grepl('NB', toupper(x))) {
+    'NC'
+  }
+  else if (grepl('HA', toupper(x))) {
+    'HI'
+  }
+  else if (grepl('PI', toupper(x))) {
+    'RI'
+  }
+  else if (grepl('PR', toupper(x))) {
+    'PA'
+  }
+  else if (grepl('GU', toupper(x))) {
+    'GA'
+  }
+  else if (grepl('NA', toupper(x))) {
+    'na'
+  }
+  else if ((nchar(x) == 2) & (!is.na(x))) {
+    toupper(x)
+  }
+  else if (grepl('california', tolower(x))) {
+    'CA'
+  }
+  else if (grepl('texas', tolower(x))) {
+    'TX'
+  }
+  else if (grepl('florida', tolower(x))) {
+    'FL'
+  }
+  else if (grepl('colorado', tolower(x))) {
+    'CO'
+  }
+  else if (grepl('georgia', tolower(x))) {
+    'GA'
+  }
+  else if (grepl('north carolina', tolower(x))) {
+    'NC'
+  }
+  else if (grepl('virginia', tolower(x))) {
+    'VA'
+  }
+  else if (grepl('new york', tolower(x))) {
+    'NY'
+  }
+  else if (grepl('washington', tolower(x))) {
+    'WA'
+  }
+  else if (grepl('arizona', tolower(x))) {
+    'AZ'
+  }
+  else if (grepl('south carolina', tolower(x))) {
+    'SC'
+  }
+  else if (grepl('maryland', tolower(x))) {
+    'MD'
+  }
+  else if (grepl('michigan', tolower(x))) {
+    'MI'
+  }
+  else if (grepl('alabama', tolower(x))) {
+    'AL'
+  }
+  else if (grepl('illinois', tolower(x))) {
+    'IL'
+  }
+  else if (grepl('indiana', tolower(x))) {
+    'IN'
+  }
+  else if (grepl('jersey', tolower(x))) {
+    'NJ'
+  }
+  else if (grepl('Missouri', tolower(x))) {
+    'MO'
+  }
+  else if (grepl('penn', tolower(x))) {
+    'PA'
+  }
+  else if (grepl('tenn', tolower(x))) {
+    'TN'
+  }
+  else if (grepl('hawaii', tolower(x))) {
+    'HI'
+  }
+  else if (grepl('louis', tolower(x))) {
+    'LA'
+  }
+  else if (grepl('okla', tolower(x))) {
+    'OK'
+  }
+  else if (grepl('nevada', tolower(x))) {
+    'NV'
+  }
+  else if (grepl('oregon', tolower(x))) {
+    'OR'
+  }
+  else if (grepl('kent', tolower(x))) {
+    'KY'
+  }
+  else if (grepl('wisc', tolower(x))) {
+    'WI'
+  }
+  else if (grepl('minne', tolower(x))) {
+    'MN'
+  }
+  else if (grepl('utah', tolower(x))) {
+    'UT'
+  }
+  else if (grepl('alaska', tolower(x))) {
+    'AK'
+  }
+  else if (grepl('district', tolower(x))) {
+    'DC'
+  }
+  else if (grepl('delaware', tolower(x))) {
+    'DE'
+  }
+  else if (grepl('mass', tolower(x))) {
+    'MA'
+  }
+  else {
+    'na'
+  }
+}
+
+df_contact$Desired_State_of_Employment__c <- lapply(as.character(df_contact$Desired_State_of_Employment__c), clean_states)
+df_contact$Desired_State_of_Employment__c <- as.factor(unlist(df_contact$Desired_State_of_Employment__c))
+
+
+# Salary
 summary(df_contact$Min_Salary_Expectations__c) # NORMALIZE OR SPLIT
 
+# set type
+df_contact$Salary_expectation_type <- lapply(df_contact$Min_Salary_Expectations__c, 
+                                             function(x) {
+                                               if (grepl('hr', x)){ 
+                                               'hourly'
+                                                 }
+                                                else if (nchar(as.character(x)) > 1) {
+                                                  'annually'
+                                                }
+                                               else {
+                                                 'na'
+                                               }
+                                             })
+df_contact$Salary_expectation_type <- as.factor(unlist(df_contact$Salary_expectation_type))
+
+# annually
+df_contact$Salary_annual_expected <- lapply(df_contact$Min_Salary_Expectations__c, 
+                                            function(x) {
+                                              if (grepl('hr', x)){ 
+                                                'na'
+                                              }
+                                              else if (nchar(as.character(x)) > 1) {
+                                                gsub( "\\$", "", as.character(x))
+                                              }
+                                              else {
+                                                'na'
+                                              }
+                                            })
+df_contact$Salary_annual_expected <- lapply(df_contact$Salary_annual_expected, function(x) {substr(x, 1, 6)})
+df_contact$Salary_annual_expected<- lapply(df_contact$Salary_annual_expected, function(x) {gsub(",", "", x)})
+df_contact$Salary_annual_expected <- as.integer(df_contact$Salary_annual_expected)
+
+# hourly
+df_contact$Salary_hourly_expected <- lapply(df_contact$Min_Salary_Expectations__c, 
+                                            function(x) {
+                                              if (grepl('hr', x)){ 
+                                                gsub( "\\$", "", as.character(x))
+                                              }
+                                              else if (nchar(as.character(x)) > 1) {
+                                                'na'
+                                              }
+                                              else {
+                                                'na'
+                                              }
+                                            })
+df_contact$Salary_hourly_expected <- lapply(df_contact$Salary_hourly_expected, function(x) {substr(x, 1, 2)})
+df_contact$Salary_hourly_expected <- as.integer(df_contact$Salary_hourly_expected)
 
 #######################
 # Print out new files #
