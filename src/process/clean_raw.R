@@ -354,7 +354,66 @@ df_feedback$Length_with_current_employer__c <- as.factor(df_feedback$Length_with
 #######33 DO THIS #############
 ###############################
 summary(df_contact$Security_Clearance_Description__c) # cut dates out and replace with yet
+
+# clean languages
 summary(df_contact$Languages_Spoken__c) # clean
+
+clean_language <- function(x) {
+  if (grepl('english', tolower(x)) & grepl('spanish', tolower(x)))
+ {
+    'English and Spanish'
+  }
+  else if (grepl('german', tolower(x))) {
+    'German'
+  }
+  else if (grepl('spanish', tolower(x))) {
+    'Spanish'
+  }
+  else if (grepl('arabic', tolower(x))) {
+    'Arabic'
+  }
+  else if (grepl('tagalog', tolower(x))) {
+    'Tagalog'
+  }
+  else if (grepl('korean', tolower(x))) {
+    'Korean'
+  }
+  else if (grepl('french', tolower(x))) {
+    'French'
+  }
+  else if (grepl('russian', tolower(x))) {
+    'Russian'
+  }
+  else if (grepl('vietnamese', tolower(x))) {
+    'Vietnamese'
+  }
+  else if (grepl('chinese', tolower(x))) {
+    'Chinese'
+  }
+  else if (grepl('italian', tolower(x))) {
+    'Italian'
+  }
+  else if (grepl('japanese', tolower(x))) {
+    'Japanese'
+  }
+  else if (grepl('english', tolower(x))) {
+    'English'
+  }
+  else if (grepl('none', tolower(x)) | (grepl('na', tolower(x)))) {
+    'na'
+  }
+  else if ((nchar(x) > 1) & (!is.na(x))) {
+    'Other'
+  }
+  else {
+    'na'
+  }
+}
+
+df_contact$Languages_Spoken__c <- lapply(as.character(df_contact$Languages_Spoken__c), clean_language)
+df_contact$Languages_Spoken__c <- as.factor(unlist(df_contact$Languages_Spoken__c))
+
+
 summary(df_contact$Job_Type__c) # split/clean
 summary(df_contact$Desired_State_of_Employment__c) # Clean
 summary(df_contact$Min_Salary_Expectations__c) # NORMALIZE OR SPLIT
