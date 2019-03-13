@@ -341,7 +341,7 @@ df_accounts[,dates] <- lapply(df_accounts[,dates] , dmy)
 #campaign
 df_campaign <- separate(df_campaign, 42, c("Program_Location_City", "Program_Location_State"), sep = ",", remove = TRUE) 
 df_campaign$Program_Location_State <- as.factor(df_campaign$Program_Location_State)
-
+df_campaign$IsActive <- as.factor(df_campaign$IsActive)
 #contact
 dates <- c(34,171)
 df_contact[,dates] <- lapply(df_contact[,dates] , mdy)
