@@ -40,5 +40,5 @@ TEAM MAT
 
 (2) RUN src/process/process_data.bat
     |--> Give time to run. Will take up to 15 minutes.
-	|--> Still in test.
+    |--> Still in test.
 ```
