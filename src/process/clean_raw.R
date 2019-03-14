@@ -138,46 +138,45 @@ df_campaign[[1]] %in% df_activities[[4]]
 ##########################################################################################
 # Print the details of each dataframe
 ##########################################################################################
-'''
-str(df_campaign, list.len=ncol(df_campaign))
-summary(df_campaign)
 
-str(df_epo_emp)
-summary(df_epo_emp)
+#str(df_campaign, list.len=ncol(df_campaign))
+#summary(df_campaign)
 
-str(df_epo_seeker)
-summary(df_epo_seeker)
+#str(df_epo_emp)
+#summary(df_epo_emp)
 
-str(df_epo_board)
-summary(df_epo_board)
+#str(df_epo_seeker)
+#summary(df_epo_seeker)
 
-str(df_feedback)
-summary(df_feedback)
+#str(df_epo_board)
+#summary(df_epo_board)
 
-str(df_activities)
-summary(df_activities)
+#str(df_feedback)
+#summary(df_feedback)
 
-str(df_accounts, list.len=ncol(df_accounts))
-summary(df_accounts)
+#str(df_activities)
+#summary(df_activities)
 
-str(df_cases)
-summary(df_cases)
+#str(df_accounts, list.len=ncol(df_accounts))
+#summary(df_accounts)
 
-str(df_contact, list.len=ncol(df_contact))
-summary(df_contact)
+#str(df_cases)
+#summary(df_cases)
 
-str(df_hire)
-summary(df_hire)
+#str(df_contact, list.len=ncol(df_contact))
+#summary(df_contact)
 
-str(df_opportunity, list.len=ncol(df_opportunity))
-summary(df_opportunity)
+#str(df_hire)
+#summary(df_hire)
 
-str(df_type)
-summary(df_type)
+#str(df_opportunity, list.len=ncol(df_opportunity))
+#summary(df_opportunity)
 
-str(df_email)
-summary(df_email)
-'''
+#str(df_type)
+#summary(df_type)
+
+#str(df_email)
+#summary(df_email)
 #####################################################
 ########## END CODE FROM M. Beckner #################
 #####################################################
