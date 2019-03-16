@@ -666,6 +666,24 @@ df_contact$Salary_hourly_expected <- lapply(df_contact$Min_Salary_Expectations__
 df_contact$Salary_hourly_expected <- lapply(df_contact$Salary_hourly_expected, function(x) {substr(x, 1, 2)})
 df_contact$Salary_hourly_expected <- as.integer(df_contact$Salary_hourly_expected)
 
+
+
+
+#################
+# CLEANING 3/15 #
+#################
+
+# more in contacts <- REMOVE MORE?
+# aggregate state
+df_contact$MailingState <- lapply(as.character(df_contact$MailingState), clean_states)
+df_contact$MailingState <- as.factor(unlist(df_contact$MailingState))
+
+
+# usa into united states 
+df_contact$MailingCountry <- lapply(df_contact$MailingCountry, function(x) {ifelse(as.character(x) == 'USA', 'United States', as.character(x))})
+df_contact$MailingCountry <- as.factor(unlist(df_contact$MailingCountry))
+
+
 #######################
 # Print out new files #
 #######################
