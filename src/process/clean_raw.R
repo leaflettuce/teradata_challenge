@@ -838,7 +838,6 @@ df_contact$Volunteer_Services__c <- as.factor(unlist(df_contact$Volunteer_Servic
 df_contact$Military_Branch__c <- lapply(as.character(df_contact$Military_Branch__c), function(x) {ifelse(x == '--None--', '', x)})
 df_contact$Military_Branch__c <- as.factor(unlist(df_contact$Military_Branch__c))
 
-
 #################
 # CLEANING 3/16 #
 #################
@@ -846,7 +845,6 @@ df_contact$Military_Branch__c <- as.factor(unlist(df_contact$Military_Branch__c)
 # contact
 df_contact$Service_Members_Status__c <- as.factor(df_contact$Service_Members_Status__c)
 df_contact$Discharge_Disposition__c <- as.factor(df_contact$Discharge_Disposition__c)
-
 
 #######################
 # Print out new files #
