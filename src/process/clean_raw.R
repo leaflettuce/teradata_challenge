@@ -838,6 +838,29 @@ df_contact$Volunteer_Services__c <- as.factor(unlist(df_contact$Volunteer_Servic
 df_contact$Military_Branch__c <- lapply(as.character(df_contact$Military_Branch__c), function(x) {ifelse(x == '--None--', '', x)})
 df_contact$Military_Branch__c <- as.factor(unlist(df_contact$Military_Branch__c))
 
+
+
+############################
+# Additional hire cleaning #
+############################
+
+# city state separator
+df_hire <- separate(df_hire, 18, c("Hired_Location_City", "Hired_Location_State"), sep = ",", remove = TRUE)
+df_hire$Hired_Location_State <- as.factor(df_hire$Hired_Location_State)
+
+df_hire$Hired_Location_State <- lapply(as.character(df_hire$Hired_Location_State), clean_states)
+df_hire$Hired_Location_State <- as.factor(unlist(df_hire$Hired_Location_State))
+
+
+# account
+# billing state
+df_accounts$BillingState <- lapply(as.character(df_accounts$BillingState), clean_states)
+df_accounts$BillingState <- as.factor(unlist(df_accounts$BillingState))
+
+######################
+######################
+######################
+
 #######################
 # Print out new files #
 #######################
