@@ -38,6 +38,7 @@ str(i_cases)
 
 i_act <- read.csv('../../data/interim/activities.csv')
 str(i_act)
+summary(i_act$STATUS)
 
 i_opp <- read.csv('../../data/interim/opportunities.csv')
-str(i_opp)
+str(i_opp, list.len = ncol(i_opp))
