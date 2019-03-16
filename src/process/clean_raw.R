@@ -682,6 +682,109 @@ df_contact$MailingState <- as.factor(unlist(df_contact$MailingState))
 # usa into united states 
 df_contact$MailingCountry <- lapply(df_contact$MailingCountry, function(x) {ifelse(as.character(x) == 'USA', 'United States', as.character(x))})
 df_contact$MailingCountry <- as.factor(unlist(df_contact$MailingCountry))
+df_contact$MailingCountry <- lapply(df_contact$MailingCountry, function(x) {ifelse(grepl('-', as.character(x)), '', as.character(x))})
+df_contact$MailingCountry <- as.factor(unlist(df_contact$MailingCountry))
+df_contact$MailingCountry <- lapply(df_contact$MailingCountry, function(x) {ifelse(grepl('2', as.character(x)), '', as.character(x))})
+df_contact$MailingCountry <- as.factor(unlist(df_contact$MailingCountry))
+df_contact$MailingCountry <- lapply(df_contact$MailingCountry, function(x) {ifelse(grepl('3', as.character(x)), '', as.character(x))})
+df_contact$MailingCountry <- as.factor(unlist(df_contact$MailingCountry))
+
+
+# LAST RNAK FUNCTION
+clean_rank <- function(x){
+  x <- toupper(gsub(" ", "", x, fixed = TRUE)) # remove whitespace
+  if (grepl('E-4', x) | grepl('E4', x)) {
+    'E-4'
+  }
+  else if (grepl('E-5', x) | grepl('E5', x)) {
+    'E-5'
+  }
+  else if (grepl('E-6', x) | grepl('E6', x)) {
+    'E-6'
+  }
+  else if (grepl('E-7', x)| grepl('E7', x)) {
+    'E-7'
+  }
+  else if (grepl('E-9', x) | grepl('E9', x)) {
+    'E-9'
+  }
+  else if (grepl('E-3', x) | grepl('E3', x)) {
+    'E-3'
+  }
+  else if (grepl('E-2', x) | grepl('E2', x)) {
+    'E-2'
+  }
+  else if (grepl('E-8', x) | grepl('E8', x)) {
+    'E-8'
+  }
+  else if (grepl('O-3', x) | grepl('O3', x)) {
+    'O-3'
+  }
+  else if (grepl('O-2', x) | grepl('O2', x)) {
+    'O-2'
+  }
+  else if (grepl('O-4', x) | grepl('O4', x)) {
+    'O-4'
+  }
+  else if (grepl('O-5', x) | grepl('O5', x)) {
+    'O-4'
+  }
+  else if (grepl('W-4', x) | grepl('W4', x)) {
+    'W-4'
+  }
+  else if (grepl('W-3', x) | grepl('W3', x)) {
+    'W-3'
+  }
+  else if (grepl('W-1', x) | grepl('W1', x)) {
+    'W-1'
+  }
+  else if (grepl('W-5', x) | grepl('W5', x)) {
+    'W-5'
+  }
+  else if (grepl('W-2', x) | grepl('W2', x)) {
+    'W-2'
+  }
+  else {
+    'not specified'
+  }
+}
+
+df_contact$Last_Rank__c <- lapply(as.character(df_contact$Last_Rank__c), clean_rank)
+df_contact$Last_Rank__c <- as.factor(unlist(df_contact$Last_Rank__c))
+
+#
+clean_education <- function(x) {
+  x <- tolower(as.character(x))
+  if (grepl('4', x) | grepl('bach', x) | grepl('ba', x) | grepl('bs', x)) {
+    'Bachelors'
+  }
+  else if (grepl('2', x) | grepl('asso', x) | grepl('aa', x) | grepl('as', x)) {
+    'Associates'
+  }
+  else if (grepl('post', x) | grepl('master', x) | grepl('ma', x) | grepl('ms', x)) {
+    'Masters'
+  }
+  else if (grepl('doct', x) | grepl('phd', x) | grepl('md', x)) {
+    'Doctorate'
+  }
+  else if (grepl('some', x)) {
+    'Some College'
+  }
+  else if (grepl('ged', x) | grepl('high', x)) {
+    'High School / GED'
+  }
+  else {
+    'not specified'
+  }
+}
+
+df_contact$Highest_Level_of_Education_Completed__c <- lapply(as.character(df_contact$Highest_Level_of_Education_Completed__c), clean_education)
+df_contact$Highest_Level_of_Education_Completed__c <- as.factor(unlist(df_contact$Highest_Level_of_Education_Completed__c))
+
+
+# status
+
+
 
 
 #######################
