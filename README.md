@@ -11,7 +11,7 @@ be necessary components to succeed in this goal.
 ## Business Questions
 ```
 TEAM CAC (*possibly changing -  need team feedback)
-- there anything in the client's demographic profile that indicates that a client is more likely to become a confirmed 
+- Is there anything in the client's demographic profile that indicates that a client is more likely to become a confirmed 
   hire or any other outcome?
 - What can we prove - quantitatively - that our volunteers are increasing the overall effectiveness of our program?
 
@@ -39,6 +39,6 @@ TEAM MAT
 	|--> save all csv's directly in this dir, no further pathing
 
 (2) RUN src/process/process_data.bat
-    |--> Give time to run. Will take up to 15 minutes.
-    |--> Still in test.
+	|--> Give time to run. Will take up to 15 minutes.
+	|--> Still in test.
 ```
