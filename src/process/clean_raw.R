@@ -783,9 +783,60 @@ df_contact$Highest_Level_of_Education_Completed__c <- as.factor(unlist(df_contac
 
 
 # status
+clean_status <- function(x) {
+  x <- tolower(as.character(x))
+  if (grepl('full', x)) {
+    'full time'
+  }
+  else if (grepl('part', x)){
+    'part time'
+  }
+  else if (grepl('enrolled', x) | grepl('student', x)) {
+    'student'
+  }
+  else if (grepl('contract', x)){
+    'contract / temporary'
+  }
+  else if (grepl('under', x)) {
+    'under employed'
+  }
+  else if (x == ''){
+    'not specified'
+  }
+  else {
+    x
+  }
+}
+
+df_contact$Status__c <- lapply(df_contact$Status__c, clean_status)
+df_contact$Status__c <- as.factor(unlist(df_contact$Status__c))
+
+# volunteer
+clean_volunteer_services <- function(x) {
+  x <- tolower(as.character(x))  
+  
+  if (grepl('mock', x)) {
+    'Mock Interview'
+  }
+  else if (grepl('career', x)) {
+    'Career Counseling'
+  }
+  else if (grepl('resume', x)) {
+    'Resume / Application'
+  }
+
+  else {
+    'None'
+  }
+}
+
+df_contact$Volunteer_Services__c <- lapply(df_contact$Volunteer_Services__c, clean_volunteer_services)
+df_contact$Volunteer_Services__c <- as.factor(unlist(df_contact$Volunteer_Services__c))
 
 
-
+# military branch
+df_contact$Military_Branch__c <- lapply(as.character(df_contact$Military_Branch__c), function(x) {ifelse(x == '--None--', '', x)})
+df_contact$Military_Branch__c <- as.factor(unlist(df_contact$Military_Branch__c))
 
 #######################
 # Print out new files #
