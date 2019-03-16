@@ -857,6 +857,8 @@ df_hire$Hired_Location_State <- as.factor(unlist(df_hire$Hired_Location_State))
 df_accounts$BillingState <- lapply(as.character(df_accounts$BillingState), clean_states)
 df_accounts$BillingState <- as.factor(unlist(df_accounts$BillingState))
 
+
+
 ######################
 ######################
 ######################

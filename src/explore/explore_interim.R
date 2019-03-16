@@ -31,4 +31,13 @@ summary(i_account$Active_Color__c)
 i_record <- read.csv('../../data/interim/record_types.csv')
 str(i_record)
 
+# <_ DO THIS
 # activities, case, oppor, 
+i_cases <- read.csv('../../data/interim/case.csv')
+str(i_cases)
+
+i_act <- read.csv('../../data/interim/activities.csv')
+str(i_act)
+
+i_opp <- read.csv('../../data/interim/opportunities.csv')
+str(i_opp)
