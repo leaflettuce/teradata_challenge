@@ -840,6 +840,7 @@ df_contact$Military_Branch__c <- as.factor(unlist(df_contact$Military_Branch__c)
 
 
 
+
 ############################
 # Additional hire cleaning #
 ############################
@@ -862,6 +863,15 @@ df_accounts$BillingState <- as.factor(unlist(df_accounts$BillingState))
 ######################
 ######################
 ######################
+=======
+#################
+# CLEANING 3/16 #
+#################
+
+# contact
+df_contact$Service_Members_Status__c <- as.factor(df_contact$Service_Members_Status__c)
+df_contact$Discharge_Disposition__c <- as.factor(df_contact$Discharge_Disposition__c)
+
 
 #######################
 # Print out new files #
