@@ -23,12 +23,12 @@ TEAM MAT
 ## Overall Process
  
 ```
-1 - Import Data
-2 - Clean and process 
-3 - EDA FTW
-5 - Find solutions to HH business problems
-6 - Create visuals
-7 - Format into a presentation.
+1 - [X] Import Data
+2 - [ ] Clean and process 
+3 - [ ] EDA FTW
+5 - [ ] Find solutions to HH business problems
+6 - [ ] Create visuals
+7 - [ ] Format into a presentation.
 ```
 
 ## Loading Data
@@ -38,7 +38,7 @@ TEAM MAT
 	|--> manually download all files from challenge dataset page
 	|--> save all csv's directly in this dir, no further pathing
 
-(2) RUN src/process/process_data.bat
+(2) RUN /src/process/process_data.bat
 	|--> Give time to run. Will take up to 15 minutes.
-	|--> Still in test.
+	|--> Cleaned files will write to /data/interim/
 ```
