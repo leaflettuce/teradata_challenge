@@ -846,7 +846,7 @@ df_contact$Military_Branch__c <- as.factor(unlist(df_contact$Military_Branch__c)
 ############################
 
 # city state separator
-df_hire <- separate(df_hire, 18, c("Hired_Location_City", "Hired_Location_State"), sep = ",", remove = TRUE)
+df_hire <- separate(df_hire, 16, c("Hired_Location_City", "Hired_Location_State"), sep = ",", remove = TRUE)
 df_hire$Hired_Location_State <- as.factor(df_hire$Hired_Location_State)
 
 df_hire$Hired_Location_State <- lapply(as.character(df_hire$Hired_Location_State), clean_states)
@@ -863,7 +863,7 @@ df_accounts$BillingState <- as.factor(unlist(df_accounts$BillingState))
 ######################
 ######################
 ######################
-=======
+
 #################
 # CLEANING 3/16 #
 #################
@@ -879,51 +879,51 @@ df_contact$Discharge_Disposition__c <- as.factor(df_contact$Discharge_Dispositio
 
 # account
 print("writing accounts csv...")
-write.csv(df_accounts, "../../data/interim/accounts.csv")
+write.csv(df_accounts, "../../data/interim/accounts.csv", row.names=FALSE)
 
 # activites !
 print("writing activities csv...")
-write.csv(df_activities, "../../data/interim/activities.csv")
+write.csv(df_activities, "../../data/interim/activities.csv", row.names=FALSE)
 
 # campaign
 print("writing campaign csv...")
-write.csv(df_campaign, "../../data/interim/campaign.csv")
+write.csv(df_campaign, "../../data/interim/campaign.csv", row.names=FALSE)
 
 # cases
 print("writing cases csv...")
-write.csv(df_cases, "../../data/interim/case.csv")
+write.csv(df_cases, "../../data/interim/case.csv", row.names=FALSE)
 
 # contact !
 print("writing contacts csv...")
-write.csv(df_contact, "../../data/interim/contacts.csv")
+write.csv(df_contact, "../../data/interim/contacts.csv", row.names=FALSE)
 
 # email !
 print("writing email csv...")
-write.csv(df_email, "../../data/interim/emails.csv")
+write.csv(df_email, "../../data/interim/emails.csv", row.names=FALSE)
 
 # epo board
 print("writing EPO csvs...")
-write.csv(df_epo_board, "../../data/interim/epo_job_board.csv")
+write.csv(df_epo_board, "../../data/interim/epo_job_board.csv", row.names=FALSE)
 
 # epo emp
-write.csv(df_epo_emp, "../../data/interim/epo_employers.csv")
+write.csv(df_epo_emp, "../../data/interim/epo_employers.csv", row.names=FALSE)
 
 # epo seeker
-write.csv(df_epo_seeker, "../../data/interim/epo_seekers.csv")
+write.csv(df_epo_seeker, "../../data/interim/epo_seekers.csv", row.names=FALSE)
 
 # feedback
 print("writing feedback csv...")
-write.csv(df_feedback, "../../data/interim/feedback.csv")
+write.csv(df_feedback, "../../data/interim/feedback.csv", row.names=FALSE)
 
 # hire
 print("writing hiring csv...")
-write.csv(df_hire, "../../data/interim/hiring.csv")
+write.csv(df_hire, "../../data/interim/hiring.csv", row.names=FALSE)
 
 # oppo
 print("writing opportunities csv...")
-write.csv(df_opportunity, "../../data/interim/opportunities.csv")
+write.csv(df_opportunity, "../../data/interim/opportunities.csv", row.names=FALSE)
 
 # type
 print("writing record types csv...")
-write.csv(df_type, "../../data/interim/record_types.csv")
+write.csv(df_type, "../../data/interim/record_types.csv", row.names=FALSE)
 

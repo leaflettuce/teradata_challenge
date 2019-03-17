@@ -19,6 +19,7 @@
 *.Rhistory
 *.Rproj
 *.RData
+*.TDataTemp
 
 # allow data dictionaries
 !_data_dictionary.xlsx
