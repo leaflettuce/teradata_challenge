@@ -20,13 +20,20 @@ os.chdir('E:/projects/teradata/src/explore')
 df_contacts = pd.read_csv('../../data/interim/contacts.csv', encoding = "ISO-8859-1")
 
 # detailing df
-con_descript = df_contacts.describe()
+con_descript = df_contacts.describe() 
 df_contacts.info()
 
 # col names
 headers = list(df_contacts.head(0))
 
 # EDA
+
+# record type
+sns.countplot(x = "RecordTypeId", data = df_contacts)
+
+df_contacts.groupby(['Volunteer_Interests__c']).size().sort_values(ascending = False).head(20)
+
+
 # gender
 sns.countplot(x = "Gender__c", data = df_contacts)
 
@@ -106,8 +113,20 @@ df_feed = pd.read_csv('../../data/interim/feedback.csv', encoding = "ISO-8859-1"
 # col names
 feed_headers = list(df_feed.head(0))
 
-# employment satistfaction
+# employment satistfactiony
 sns.countplot(x = "Emplo__c", data = df_feed)
 
 
 
+#################
+# split by type #
+#################
+volunteers = df_contacts[df_contacts['Volunteer__c'] == 1]
+clients = df_contacts[df_contacts['Client__c'] == 1]
+
+# client used vol
+client_used_vol_services = df_contacts[df_contacts['Used_Volunteer_Services__c'] == 1]
+client_no_vol_services = df_contacts[df_contacts['Used_Volunteer_Services__c'] == 0]
+
+sns.countplot(x = 'Times_Hired__c', data = df_contacts)
+sns.violinplot(x = 'Used_Volunteer_Services__c' ,y = 'Times_Hired__c', data = df_contacts)
