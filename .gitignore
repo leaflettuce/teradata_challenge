@@ -3,6 +3,8 @@
 /data/*
 *.csv
 *.xlsx
+*.zip
+*.docx
 
 # imgs for reports
 /reports/visuals/*

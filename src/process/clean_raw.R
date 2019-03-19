@@ -873,6 +873,178 @@ df_contact$Service_Members_Status__c <- as.factor(df_contact$Service_Members_Sta
 df_contact$Discharge_Disposition__c <- as.factor(df_contact$Discharge_Disposition__c)
 
 
+
+####################################
+# MERGE DATASETS - FROM MITCH 3/18 #
+####################################
+
+df_hire_contact_join <- left_join(df_contact, df_hire, by = c("Id" = "Client_Name__c"))
+
+# reduce
+df_topic_edit1 <- df_hire_contact_join[,c(1,4:6,9:11,23:26,47,49,54,66,79,89,96,99,104,117,157,168,179,
+                                          183,186,187,190,238:241,257,260,261,272,283,292,302,303,305:310,
+                                          315,318,336,337,359,361,377,382:389,394,395)]
+# crate age
+df_topic_edit1["Age"] <- as.numeric(today() - ymd(as.character(df_topic_edit1$Date_Of_Birth__c)))/365
+
+# replace na with 0
+for (i in 1:nrow(df_topic_edit1)){
+  if(is.na(df_topic_edit1[i,"Age"])){
+    df_topic_edit1[i,"Age"] <- 0
+  }
+}
+
+# bin ages
+df_topic_edit1["Age_bin"] <- ""
+
+for (i in 1:nrow(df_topic_edit1)){
+  if (df_topic_edit1[i,"Age"] < 16) {
+    df_topic_edit1[i,"Age_bin"] <- 'Underage'
+  }
+  else if (df_topic_edit1[i,"Age"] >= 16 & df_topic_edit1[i,"Age"] < 21) {
+    df_topic_edit1[i,"Age_bin"] <- '16-20'
+  }
+  else if (df_topic_edit1[i,"Age"] >= 21 & df_topic_edit1[i,"Age"] < 26) {
+    df_topic_edit1[i,"Age_bin"] <- '21-25'
+  }
+  else if (df_topic_edit1[i,"Age"] >= 26 & df_topic_edit1[i,"Age"] < 31) {
+    df_topic_edit1[i,"Age_bin"] <- '26-30'
+  }
+  else if (df_topic_edit1[i,"Age"] >= 31 & df_topic_edit1[i,"Age"] < 36) {
+    df_topic_edit1[i,"Age_bin"] <- '31-35'
+  }
+  else if (df_topic_edit1[i,"Age"] >= 36 & df_topic_edit1[i,"Age"] < 41) {
+    df_topic_edit1[i,"Age_bin"] <- '36-40'
+  }
+  else if (df_topic_edit1[i,"Age"] >= 41 & df_topic_edit1[i,"Age"] < 46) {
+    df_topic_edit1[i,"Age_bin"] <- '41-45'
+  }
+  else if (df_topic_edit1[i,"Age"] >= 46 & df_topic_edit1[i,"Age"] < 51) {
+    df_topic_edit1[i,"Age_bin"] <- '46-50'
+  }
+  else if (df_topic_edit1[i,"Age"] >= 51 & df_topic_edit1[i,"Age"] < 56) {
+    df_topic_edit1[i,"Age_bin"] <- '51-55'
+  }
+  else if (df_topic_edit1[i,"Age"] >= 56 & df_topic_edit1[i,"Age"] < 61) {
+    df_topic_edit1[i,"Age_bin"] <- '56-60'
+  }
+  else if (df_topic_edit1[i,"Age"] >= 61 & df_topic_edit1[i,"Age"] < 66) {
+    df_topic_edit1[i,"Age_bin"] <- '61-65'
+  }
+  else if (df_topic_edit1[i,"Age"] >= 66 & df_topic_edit1[i,"Age"] < 71) {
+    df_topic_edit1[i,"Age_bin"] <- '66-70'
+  }
+  else if (df_topic_edit1[i,"Age"] >= 71 & df_topic_edit1[i,"Age"] < 76) {
+    df_topic_edit1[i,"Age_bin"] <- '71-75'
+  }
+  else if (df_topic_edit1[i,"Age"] >= 76 & df_topic_edit1[i,"Age"] < 81) {
+    df_topic_edit1[i,"Age_bin"] <- '76-80'
+  }
+  else {
+    df_topic_edit1[i,"Age_bin"] <- 'not specified'
+  }
+}
+
+df_topic_edit1$Age_bin <- as.factor(unlist(df_topic_edit1$Age_bin))
+
+# create days in program
+df_topic_edit1["Days_in_Program"] <- NA
+
+for (i in 1:nrow(df_topic_edit1)){
+  if(df_topic_edit1[i,"Active_Color__c"] =="Black"){
+    df_topic_edit1[i,"Days_in_Program"] <- difftime(df_topic_edit1[i, "Date_Turned_Black__c"] , df_topic_edit1[i,"Dat_Initial_Assessment_was_Completed__c"], units="days")
+  }
+  else if (df_topic_edit1[i,"Active_Color__c"] =="Grey") {
+    df_topic_edit1[i,"Days_in_Program"] <- difftime(df_topic_edit1[i, "Date_turned_grey__c"] , df_topic_edit1[i,"Dat_Initial_Assessment_was_Completed__c"], units="days")
+  }
+  else if (df_topic_edit1[i,"Active_Color__c"] =="Blue") {
+    df_topic_edit1[i,"Days_in_Program"] <- difftime(df_topic_edit1[i, "Confirmed_Hired_Date__c.y"] , df_topic_edit1[i,"Dat_Initial_Assessment_was_Completed__c"], units="days")
+  }
+  else if (df_topic_edit1[i,"Active_Color__c"] =="Green" | df_topic_edit1[i,"Active_Color__c"] =="Purple" | df_topic_edit1[i,"Active_Color__c"] =="Red") {
+    df_topic_edit1[i,"Days_in_Program"] <- difftime(as.POSIXct("2019-3-1", format = "%Y-%m-%d", tz = "") , df_topic_edit1[i,"Dat_Initial_Assessment_was_Completed__c"], units="days")
+  }
+  else {
+    df_topic_edit1[i,"Days_in_Program"] <- NA
+  }
+}
+
+# get rid of clients
+df_clients <- filter(df_topic_edit1, Client__c == 1)
+
+# outlier row
+df_clients_no <- filter(df_clients, Days_in_Program < 73000 & Days_in_Program >0)
+
+# create spouse
+df_contact_spouses <- filter(df_topic_edit1, Military_Spouse_Caregiver__c ==1 & Client__c == 1)
+str(df_contact_spouses, list.len=ncol(df_contact_spouses))
+summary(df_contact_spouses)
+
+# create vet
+df_contact_vets <- filter(df_topic_edit1, Military_Spouse_Caregiver__c ==0 & Client__c == 1)
+str(df_contact_vets, list.len=ncol(df_contact_vets))
+summary(df_topic_edit1)
+
+
+############################
+# CREATE TEAM CAC REDUCDED #
+############################
+
+df_hire_contact_join <- left_join(df_contact, df_hire, by = c("Id" = "Client_Name__c"))
+
+# reduce
+df_topic_edit2 <- df_hire_contact_join[,c(1,4:6,9:11,18,20,23:26,30,34,35,45,47,49,53,54,59,60,66,79,89,95,
+                                          96,97,99,101,102,104,117,123,125,126,157,168,170,179,180, 
+                                          183,186,187,190,217,218,222,227,231,238:241,257,260,261,272,283,292,293,
+                                          294,297,299, 302,303,305:310,318,324,336,337,338,339,357,
+                                          359,361,362:369,377,382:389,392,394,395)]
+
+# crate age 
+df_topic_edit2["Age"] <- as.numeric(today() - ymd(as.character(df_topic_edit2$Date_Of_Birth__c)))/365
+
+# replace na with 0
+for (i in 1:nrow(df_topic_edit2)){
+  if(is.na(df_topic_edit2[i,"Age"])){
+    df_topic_edit2[i,"Age"] <- 0
+  }
+}
+
+
+# create days in program
+df_topic_edit2["Days_in_Program"] <- NA
+
+for (i in 1:nrow(df_topic_edit2)){
+  if(df_topic_edit2[i,"Active_Color__c"] =="Black"){
+    df_topic_edit2[i,"Days_in_Program"] <- difftime(df_topic_edit2[i, "Date_Turned_Black__c"] , df_topic_edit2[i,"Dat_Initial_Assessment_was_Completed__c"], units="days")
+  }
+  else if (df_topic_edit2[i,"Active_Color__c"] =="Grey") {
+    df_topic_edit2[i,"Days_in_Program"] <- difftime(df_topic_edit2[i, "Date_turned_grey__c"] , df_topic_edit2[i,"Dat_Initial_Assessment_was_Completed__c"], units="days")
+  }
+  else if (df_topic_edit2[i,"Active_Color__c"] =="Blue") {
+    df_topic_edit2[i,"Days_in_Program"] <- difftime(df_topic_edit2[i, "Confirmed_Hired_Date__c.y"] , df_topic_edit2[i,"Dat_Initial_Assessment_was_Completed__c"], units="days")
+  }
+  else if (df_topic_edit2[i,"Active_Color__c"] =="Green" | df_topic_edit2[i,"Active_Color__c"] =="Purple" | df_topic_edit2[i,"Active_Color__c"] =="Red") {
+    df_topic_edit2[i,"Days_in_Program"] <- difftime(as.POSIXct("2019-3-1", format = "%Y-%m-%d", tz = "") , df_topic_edit2[i,"Dat_Initial_Assessment_was_Completed__c"], units="days")
+  }
+  else {
+    df_topic_edit2[i,"Days_in_Program"] <- NA
+  }
+}
+
+str(df_topic_edit2)
+
+# connect to feedback
+df_topic_edit2_feed <-left_join(df_topic_edit2, df_feedback, by = c("Id" = "ContactID__c"))
+
+df_topic_edit2_fin <- df_topic_edit2_feed[ , c(1:104, 133)]
+
+
+# final cleaning for edit 2
+# get rid of clients
+df2_clients <- filter(df_topic_edit2_fin, Client__c == 1)
+df2_volunteers <- filter(df_topic_edit2_fin, Volunteer__c == 1)
+df2_clients_w_vol <- filter(df_topic_edit2_fin, Used_Volunteer_Services__c == 1 & Client__c == 1)
+df2_clients_wo_vol <- filter(df_topic_edit2_fin, Used_Volunteer_Services__c == 0 & Client__c == 1)
+
 #######################
 # Print out new files #
 #######################
@@ -926,4 +1098,26 @@ write.csv(df_opportunity, "../../data/interim/opportunities.csv", row.names=FALS
 # type
 print("writing record types csv...")
 write.csv(df_type, "../../data/interim/record_types.csv", row.names=FALSE)
+
+
+##########################
+# WRITE REDUCED DATASETS #
+#########################
+ 
+# TEAM_MAT_DS
+print("writing reduced datasets for team 2...")
+write.csv(df_topic_edit1, "../../data/processed/contact_hire_MAT.csv", row.names=FALSE)
+# df_contact_spouses
+write.csv(df_contact_spouses, "../../data/processed/spouses_MAT.csv", row.names=FALSE)
+# df_contact_vets
+write.csv(df_contact_vets, "../../data/processed/vets_MAT.csv", row.names=FALSE)
+
+# TEAM_CAC_DS
+print("writing reduced datasets for team 1...")
+write.csv(df_topic_edit2_fin, "../../data/processed/contact_hire_CAC.csv", row.names=FALSE)
+# subsets
+write.csv(df2_clients, "../../data/processed/clients_CAC.csv", row.names=FALSE)
+write.csv(df2_volunteers, "../../data/processed/volunteers_CAC.csv", row.names=FALSE)
+write.csv(df2_clients_w_vol, "../../data/processed/clients_w_volunteers.csv", row.names=FALSE)
+write.csv(df2_clients_wo_vol, "../../data/processed/clients_without_volunteerts.csv", row.names=FALSE)
 
