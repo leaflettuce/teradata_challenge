@@ -10,7 +10,7 @@ be necessary components to succeed in this goal.
 
 ## Business Questions
 ```
-TEAM CAC (*possibly changing -  need team feedback)
+TEAM CAC
 - Is there anything in the client's demographic profile that indicates that a client is more likely to become a confirmed 
   hire or any other outcome?
 - What can we prove - quantitatively - that our volunteers are increasing the overall effectiveness of our program?
