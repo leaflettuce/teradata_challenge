@@ -1077,10 +1077,11 @@ for (i in 1:nrow(df_topic_edit2)){
 str(df_topic_edit2)
 
 # connect to feedback
-df_topic_edit2_feed <-left_join(df_topic_edit2, df_feedback, by = c("Id" = "ContactID__c"))
+#df_topic_edit2_feed <-left_join(df_topic_edit2, df_feedback, by = c("Id" = "ContactID__c"))
 
-df_topic_edit2_fin <- df_topic_edit2_feed[ , c(1:104, 133)]
+#df_topic_edit2_fin <- df_topic_edit2_feed[ , c(1:104, 133)]
 
+df_topic_edit2_fin <- df_topic_edit2
 
 # final cleaning for edit 2
 # get rid of clients
@@ -1088,6 +1089,8 @@ df2_clients <- filter(df_topic_edit2_fin, Client__c == 1)
 df2_volunteers <- filter(df_topic_edit2_fin, Volunteer__c == 1)
 df2_clients_w_vol <- filter(df_topic_edit2_fin, Used_Volunteer_Services__c == 1 & Client__c == 1)
 df2_clients_wo_vol <- filter(df_topic_edit2_fin, Used_Volunteer_Services__c == 0 & Client__c == 1)
+df2_hired <- filter(df_topic_edit2_fin, Hire_Heroes_USA_Confirmed_Hire__c == 1)
+df2_not_hired <- filter(df_topic_edit2_fin, Hire_Heroes_USA_Confirmed_Hire__c == 0)
 
 #######################
 # Print out new files #
@@ -1163,5 +1166,7 @@ write.csv(df_topic_edit2_fin, "../../data/processed/contact_hire_CAC.csv", row.n
 write.csv(df2_clients, "../../data/processed/clients_CAC.csv", row.names=FALSE)
 write.csv(df2_volunteers, "../../data/processed/volunteers_CAC.csv", row.names=FALSE)
 write.csv(df2_clients_w_vol, "../../data/processed/clients_w_volunteers.csv", row.names=FALSE)
-write.csv(df2_clients_wo_vol, "../../data/processed/clients_without_volunteerts.csv", row.names=FALSE)
+write.csv(df2_clients_wo_vol, "../../data/processed/clients_without_volunteers.csv", row.names=FALSE)
+write.csv(df2_hired, "../../data/processed/clients_hired.csv", row.names=FALSE)
+write.csv(df2_not_hired, "../../data/processed/clients_not_hired", row.names=FALSE)
 

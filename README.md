@@ -24,7 +24,7 @@ TEAM MAT
  
 ```
 1 - [X] Import Data
-2 - [ ] Clean and process 
+2 - [X] Clean and process 
 3 - [ ] EDA FTW
 5 - [ ] Find solutions to HH business problems
 6 - [ ] Create visuals
