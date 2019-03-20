@@ -38,6 +38,7 @@ sns.heatmap(df_num_corr,
             xticklabels=df_num_corr.columns,
             yticklabels=df_num_corr.columns)
 
+# NUMERICS
 sns.scatterplot(x = 'Age', y = 'Days_in_Program', data = df)
 
 sns.scatterplot(x = 'Min_Salary_Expectations__c', y = 'Days_in_Program', data = df)
@@ -49,6 +50,10 @@ sns.scatterplot(x = 'Min_Salary_Expectations__c', y = 'Days_in_Program', hue = '
 sns.countplot(x = 'Race__c', data = df)
 sns.boxplot(x = 'Gender__c', y = 'Days_in_Program', data = df)
 sns.barplot(x = 'Race__c', y = 'Days_in_Program', data = df)
-# THIS
-sns.violinplot(x = 'Race__c', y = 'Days_in_Program', hue = 'Gender__c', data = df, 
+sns.violinplot(x = 'Race__c', y = 'Days_in_Program', hue = 'Gender__c', data = df,            # THIS THIS THIS
                palette = 'muted', split = True, scale = 'count', inner = 'quartile')
+
+# Turned blue date 
+# set as date and explore
+
+# Rank and service to time
