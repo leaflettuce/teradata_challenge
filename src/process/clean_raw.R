@@ -881,7 +881,7 @@ df_contact$Discharge_Disposition__c <- as.factor(df_contact$Discharge_Dispositio
 df_hire_contact_join <- left_join(df_contact, df_hire, by = c("Id" = "Client_Name__c"))
 
 # reduce
-df_topic_edit1 <- df_hire_contact_join[,c(1,4:6,9:11,23:26,47,49,54,66,79,89,96,99,104,117,157,168,179,
+df_topic_edit1 <- df_hire_contact_join[,c(1,4:6,9:11,23:26,47,49,54,58,66,79,85,89,96,99,104,117,157,168,179,
                                           183,186,187,190,238:241,257,260,261,272,283,292,302,303,305:310,
                                           315,318,336,337,359,361,377,382:389,394,395)]
 # crate age
@@ -951,21 +951,43 @@ df_topic_edit1$Age_bin <- as.factor(unlist(df_topic_edit1$Age_bin))
 df_topic_edit1["Days_in_Program"] <- NA
 
 for (i in 1:nrow(df_topic_edit1)){
-  if(df_topic_edit1[i,"Active_Color__c"] =="Black"){
-    df_topic_edit1[i,"Days_in_Program"] <- difftime(df_topic_edit1[i, "Date_Turned_Black__c"] , df_topic_edit1[i,"Dat_Initial_Assessment_was_Completed__c"], units="days")
-  }
-  else if (df_topic_edit1[i,"Active_Color__c"] =="Grey") {
-    df_topic_edit1[i,"Days_in_Program"] <- difftime(df_topic_edit1[i, "Date_turned_grey__c"] , df_topic_edit1[i,"Dat_Initial_Assessment_was_Completed__c"], units="days")
-  }
-  else if (df_topic_edit1[i,"Active_Color__c"] =="Blue") {
-    df_topic_edit1[i,"Days_in_Program"] <- difftime(df_topic_edit1[i, "Confirmed_Hired_Date__c.y"] , df_topic_edit1[i,"Dat_Initial_Assessment_was_Completed__c"], units="days")
-  }
-  else if (df_topic_edit1[i,"Active_Color__c"] =="Green" | df_topic_edit1[i,"Active_Color__c"] =="Purple" | df_topic_edit1[i,"Active_Color__c"] =="Red") {
-    df_topic_edit1[i,"Days_in_Program"] <- difftime(as.POSIXct("2019-3-1", format = "%Y-%m-%d", tz = "") , df_topic_edit1[i,"Dat_Initial_Assessment_was_Completed__c"], units="days")
-  }
-  else {
-    df_topic_edit1[i,"Days_in_Program"] <- NA
-  }
+	if(!is.na(df_topic_edit1[i,"Date_Assigned_To_Online__c"])){
+  		if(df_topic_edit1[i,"Active_Color__c"] =="Black"){
+    			df_topic_edit1[i,"Days_in_Program"] <- difftime(df_topic_edit1[i, "Date_Turned_Black__c"] , df_topic_edit1[i,"Date_Assigned_To_Online__c"], units="days")
+  		}
+		else if (df_topic_edit1[i,"Active_Color__c"] =="Grey") {
+    			df_topic_edit1[i,"Days_in_Program"] <- difftime(df_topic_edit1[i, "Date_turned_grey__c"] , df_topic_edit1[i,"Date_Assigned_To_Online__c"], units="days")
+  		}
+		else if (df_topic_edit1[i,"Active_Color__c"] =="Blue") {
+    			df_topic_edit1[i,"Days_in_Program"] <- difftime(df_topic_edit1[i, "Confirmed_Hired_Date__c.y"] , df_topic_edit1[i,"Date_Assigned_To_Online__c"], units="days")
+  		}
+		else if (df_topic_edit1[i,"Active_Color__c"] =="Green" | df_topic_edit1[i,"Active_Color__c"] =="Purple" | df_topic_edit1[i,"Active_Color__c"] =="Red") {
+    			df_topic_edit1[i,"Days_in_Program"] <- difftime(as.POSIXct("2019-3-1", format = "%Y-%m-%d", tz = "") , df_topic_edit1[i,"Date_Assigned_To_Online__c"], units="days")
+  		}
+		else {
+    			df_topic_edit1[i,"Days_in_Program"] <- NA
+  		}
+	}
+	else if(!is.na(df_topic_edit1[i,"Date_Assigned_To_HHUSA__c"])){
+  		if(df_topic_edit1[i,"Active_Color__c"] =="Black"){
+    			df_topic_edit1[i,"Days_in_Program"] <- difftime(df_topic_edit1[i, "Date_Turned_Black__c"] , df_topic_edit1[i,"Date_Assigned_To_HHUSA__c"], units="days")
+  		}
+		else if (df_topic_edit1[i,"Active_Color__c"] =="Grey") {
+    			df_topic_edit1[i,"Days_in_Program"] <- difftime(df_topic_edit1[i, "Date_turned_grey__c"] , df_topic_edit1[i,"Date_Assigned_To_HHUSA__c"], units="days")
+  		}
+		else if (df_topic_edit1[i,"Active_Color__c"] =="Blue") {
+    			df_topic_edit1[i,"Days_in_Program"] <- difftime(df_topic_edit1[i, "Confirmed_Hired_Date__c.y"] , df_topic_edit1[i,"Date_Assigned_To_HHUSA__c"], units="days")
+  		}
+		else if (df_topic_edit1[i,"Active_Color__c"] =="Green" | df_topic_edit1[i,"Active_Color__c"] =="Purple" | df_topic_edit1[i,"Active_Color__c"] =="Red") {
+    			df_topic_edit1[i,"Days_in_Program"] <- difftime(as.POSIXct("2019-3-1", format = "%Y-%m-%d", tz = "") , df_topic_edit1[i,"Date_Assigned_To_HHUSA__c"], units="days")
+  		}
+		else {
+    			df_topic_edit1[i,"Days_in_Program"] <- NA
+  		}
+	}
+	else {
+    			df_topic_edit1[i,"Days_in_Program"] <- NA
+  		}	
 }
 
 # get rid of clients
