@@ -41,4 +41,8 @@ TEAM MAT
 (2) RUN /src/process/process_data.bat
 	|--> Give time to run. Will take up to 15 minutes.
 	|--> Cleaned files will write to /data/interim/
+
+(3) RUN /src.process/create_era.bat
+	|--> Give time to run. Can take up to 20 minutes.
+	|--> Only run if you need this variable for analysis.
 ```
