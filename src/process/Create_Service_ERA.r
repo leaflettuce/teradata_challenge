@@ -29,9 +29,12 @@ add_era <- function(x) {
 	else if (x < ymd("1975-5-7")){
 		'Vietnam era'
 	}
-	else if (x < ymd(today())){
+	else if (x < ymd("2001-9-11")){
 		'Gulf War'
 	}	
+	else if (x < ymd(today())){
+	  'Post 9/11'
+	  }	
 	else {
 		'Currently Enlisted'
 	}
