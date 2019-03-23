@@ -2,35 +2,48 @@
 # Create Service Era Var         #
 # Substitute df name as needed   #
 ##################################
+library(lubridate)
 
+setwd('E:/projects/teradata/src/process/')
+df_topic_edit1 <- read.csv('../../data/processed/team_CAC/contact_hire_CAC.csv')
+# df_topic_edit1$Most_Recent_Service_ERA <- ''
 
-for (i in 1:nrow(df_topic_edit1)){
-	x <- as.character(df_topic_edit1[i,'Date_of_SeparationNew__c'])
+#function to check for date and apply era
+add_era <- function(x) {
+	  x <- ymd(as.character(x))
 	if (is.na(x)){
-		df_topic_edit1[i,'Most_Recent_Service_ERA']<- 'NA'
+		'NA'
 	}
 	else if(x < ymd("1917-4-5")){
-		df_topic_edit1[i,'Most_Recent_Service_ERA']<- 'Mexican Border Period'
+	'Mexican Border Period'
 	}
 	else if (x < ymd("1918-11-11")){
-		df_topic_edit1[i,'Most_Recent_Service_ERA']<- 'World War I'
+		'World War I'
 	}
 	else if (x < ymd("1946-12-31")){
-		df_topic_edit1[i,'Most_Recent_Service_ERA']<- 'World War II'
+		'World War II'
 	}
 	else if (x < ymd("1955-1-31")){
-		df_topic_edit1[i,'Most_Recent_Service_ERA']<- 'Korean Conflict'
+		'Korean Conflict'
 	}
 	else if (x < ymd("1975-5-7")){
-		df_topic_edit1[i,'Most_Recent_Service_ERA']<- 'Vietnam era'
+		'Vietnam era'
 	}
-	else if (x < ymd(today())){
-		df_topic_edit1[i,'Most_Recent_Service_ERA']<- 'Gulf War'
+	else if (x < ymd("2001-9-11")){
+		'Gulf War'
 	}	
+	else if (x < ymd(today())){
+	  'Post 9/11'
+	  }	
 	else {
-		df_topic_edit1[i,'Most_Recent_Service_ERA']<- 'Currently Enlisted'
+		'Currently Enlisted'
 	}
 }
 
+# apply function and unlist
+df_topic_edit1$Most_Recent_Service_ERA <- lapply(df_topic_edit1$Date_of_SeparationNew__c, add_era)
 df_topic_edit1$Most_Recent_Service_ERA <- as.factor(unlist(df_topic_edit1$Most_Recent_Service_ERA))
+
+# write it out
+write.csv(df_topic_edit1, file = "../../data/processed/df_cac_w_service_era.csv", row.names = FALSE)
 
