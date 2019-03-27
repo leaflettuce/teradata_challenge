@@ -45,8 +45,8 @@ for(name in names(df)){
 }
 
 for(name in names(df)){
-  for(level in unique(df[name])){
-    df[paste("dummy", level, sep = "_")] <- ifelse(as.character(df[name]) == level, 1, 0)
+  for(level in levels(df[ , name])){
+    df[paste("dummy", level, sep = "_")] <- lapply(df[name], function(x) {ifelse(x == level, 1, 0)})
   }
 }
 
@@ -65,8 +65,21 @@ df$days_in_program <- NULL
 df$hired <- y_hired
 
 # log reg
-log_model <- glm(formula = hired ~ ., family = binomial(link = "logit"), data = df)
+train <- df[1:12500, ]
+test <- df[12501:17068, ]
+test_actual <- df$hired
+test$hired <- NULL
+
+log_model <- glm(formula = hired ~ ., family = binomial(link = "logit"), data = train)
 summary(log_model)
+#anova(log_model, test = 'Chisq')
+
+test_pred <- predict(log_model, test, type = 'response')
+test_pred <- ifelse(test_pred > 0.5,1,0)
+
+class_error <- mean(test_pred != test_actual)
+print(paste('Accuracy',1-class_error))
+
 
 
 # regression
