@@ -1,0 +1,44 @@
+STRENGTHS
+- 80% online registration 
+- Workshops and Onward to Opportunity help hire odds
+- OtO reduces time in program slightly
+- Volunteer benefit proportional across educations
+- Marines find work fastest
+
+PROBLEM AREAS
+- Workshops help disproportionally (.8 for whites, .35 and .47 for asian/black)
+- Workshops add extreme time to hire (non-whites)
+- Disabled clients less liekly to find work
+- Air force clients takes longest to find work
+- Korean, Arabic, and Vietnamese bi-ligual racism?
+
+VOLUNTEER RESULTS
+- statistically significant in predicting based on demo info of client (p < .05)
+- Volunteer used reduces program drop rates (leave without job)
+- Black females see largest benefit from volunteer use, least from asian males
+- Using volunteer will give slightly higher chance of higher salary (distirbutions) 
+- 2.7X more likely to be hired if using volunteer
+- 2X more liekly to be hired through workshop
+- Very effective for lower ranks
+- 25% less move to grey
+
+RANDOM
+- security clearance/volunteer hire rates
+- salary trends
+- Clients moving from VA and WA to CO and NH
+- Time to find work in states very disproportionate
+- more skill and education lead to long times to hire
+
+PRESENTATION IDEAS
+- Begin with descriptive stats on demo and program
+- highlight strengths and weaknesses in current system
+----- Disability, race inequality, states, etc
+- Highlight (and quantify) benefits of volunteer services
+- Where to move forward and create value?
+
+DATA TO SOURCE
+- Census to compare HH demo to American standard
+- Census per state data?
+- Demo of military for comparison
+- Can we source what 'describes' people likely to use hiring assistance programs?
+
