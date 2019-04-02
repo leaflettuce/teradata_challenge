@@ -1,0 +1,52 @@
+INTRO
+(1)
+- Intro slide 
+   - Company / Names / Challenge Title
+(2)
+- Project Explanation 
+   - Brief Description of Dataset & Goal Identification
+
+BACKGROUND
+(3)
+- Detailed Description of Demo by Hiring Likelyhood
+   -  Race / Gender / Edu / etc
+   - Identify unique findings / ineuqalities found
+   - wordclouds? (Christine)
+(4)
+- Detailed Description of Demo by Time in Program
+   - Race / Gender / Edu / etc
+   - Identify unique findings / inequalities
+(5)
+- More Specific Finding
+   - State Analysis
+   - Bring in Census Data
+   - maps of FROM to HIRED LOC?
+(6)
+- More Specific Findings (2)
+   - Branch and Rank Patterns
+   - Enlisted v Officer v Salary v time scatter (andy)
+   - Find more 3rd-party data?
+
+SOLUTIONS
+(7)
+- Volunteer Effectiveness (Hiring Likelihood)
+   - Descripotive of how can volunteering solve the issues higlighted previously
+   - Quantify this value as much as possible
+(8)
+- Volunteer Effectiveness (Who -OR- Time in program)
+   - Who benefits most from volunteers historically
+   - how can this be used to benefit outside this group?
+   -OR-
+   - Volunteering effects on time in program (actively seeking) (Andy)
+(9)
+- FREE SLIDE (ideas)
+   - Very specific finding (most interesting)
+   - In depth cluster analysis if not used in any BACKGROUND slides
+   - What makes HH so great? (Charity Navigator rankings / reasons?)
+
+CONCLUSION
+(10)
+- Conclusion slide   
+   - recap 3 most important findings?
+   - suggest 3 steps to go from here?
+

@@ -1,0 +1,37 @@
+STORIES FROM FINDINGS AVAILABLE 
+-------------------------------------
+ *  - Speficially requested in business question.
+[s] - data source needed
+(n) - presentation slide suggestion
+++  - More analysis needed
+-------------------------------------
+
+- The HH client demo vs the typical job seeker in U.S. [census data] ++
+
+* How education race gender and client type affect odds of getting job (3)
+
+* How education race gender and client type affect odds of time in program (4)
+
+- State findings - from/job_loc rates? time in prog rates? [Census Data] (5) ++
+
+- Inequality in successful job find rates based on branch/rank/salary relationships (6) ++
+
+- Summary skill divide between likely hired and likely non-hires (include in 3 or 4) ++
+
+- Disability affects hire rates (include in 3 or 4)
+
+* Volunteering increases odds of finding work by 2.7x (7)
+
+* Volunteering keeps clients in the prog (7)
+
+* Volunteering usage and effectiveness inequal across demo's (8)
+
+- Workshops increase hire likelihood by 2x (comparison on 7?)
+
+- Use demo and volunteer to predict client outcome @ 70% 
+
+- More skills, edu, and exp equal longer time looking for work
+
+- Three languages are unexpectedly not helping find work (3 or 4?)
+
+- Security clearance boost to hired? ++ 
