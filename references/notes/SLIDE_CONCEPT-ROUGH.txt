@@ -5,44 +5,46 @@ INTRO
 (2)
 - Project Explanation 
    - Brief Description of Dataset & Goal Identification
+   - CHARITY NAV STATS 
+   - What do we know
 
 BACKGROUND
 (3)
 - Detailed Description of Demo by Hiring Likelyhood
    -  Race / Gender / Edu / etc
-   - Identify unique findings / ineuqalities found
-   - wordclouds? (Christine)
+   - Other trends
+   - wordclouds? (Christine) ASK ABOUT THIS!
 (4)
 - Detailed Description of Demo by Time in Program
-   - Race / Gender / Edu / etc
-   - Identify unique findings / inequalities
+   - Race / Gender / Edu / etc (heatmap)
+   - Identify unique findings / inequalities (
 (5)
 - More Specific Finding
-   - State Analysis
-   - Bring in Census Data
+   - State Analysis (hiring and time?)
+   - JOB GROWTH OPPORTUNITY
    - maps of FROM to HIRED LOC?
 (6)
 - More Specific Findings (2)
    - Branch and Rank Patterns
-   - Enlisted v Officer v Salary v time scatter (andy)
-   - Find more 3rd-party data?
+   - Enlisted v Offic STATE?
 
 SOLUTIONS
 (7)
 - Volunteer Effectiveness (Hiring Likelihood)
    - Descripotive of how can volunteering solve the issues higlighted previously
-   - Quantify this value as much as possible
+   - Quantify this value as much as possible (OVERALL CHANGE) 
+   - 
 (8)
 - Volunteer Effectiveness (Who -OR- Time in program)
-   - Who benefits most from volunteers historically
+   - Who benefits most from volunteers historically? (disab)
    - how can this be used to benefit outside this group?
-   -OR-
-   - Volunteering effects on time in program (actively seeking) (Andy)
+   - BY STATE?
 (9)
 - FREE SLIDE (ideas)
-   - Very specific finding (most interesting)
+   - Very specific finding (most interesting) 
+   - LOG REG??
    - In depth cluster analysis if not used in any BACKGROUND slides
-   - What makes HH so great? (Charity Navigator rankings / reasons?)
+   - How to Grow?
 
 CONCLUSION
 (10)
