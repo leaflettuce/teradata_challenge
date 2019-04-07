@@ -10,11 +10,13 @@ df <- read.csv('../../data/processed/team_CAC/contact_hire_CAC.csv')
 df <- filter(df, Client__c == 1)
 
 dates <- c(55,62)
-df[,dates] <- lapply(as.Date(df[,dates], "%Y-%b-%d"), mdy)
+df[,dates] <- lapply(df[,dates] , ymd)
 
-df$actively_searching <- 
+df$actively_searching <- NA
+df$actively_searching <- difftime(df$Date_Turned_Blue__c , df$Date_turned_green__c, units="days")
+
   
-keep <- c(10,11,18,40,65,74,81,106)
+keep <- c(10,11,18,40,65,74,81,106, 107)
 df <- df[ , keep]
 
 # remove NAs
@@ -35,7 +37,7 @@ df <- df[-toBeRemoved,]
 #####################
 str(df)
 
-y_time <- df$Days_in_Program
+y_time <- df$actively_searching
 y_hired <- df$Hire_Heroes_USA_Confirmed_Hire__c
 
 df$Days_in_Program <- NULL
@@ -92,6 +94,9 @@ print(paste('Accuracy',1-class_error))
 # regression
 df$hired <- NULL
 df$Days_in_Program <- y_time
+df$Days_in_Program <- as.numeric(df$Days_in_Program)
+df$Days_in_Program <- lapply(df$Days_in_Program, function(x){ifelse(x >= 0 & x < 500, x, 0)})
+df$Days_in_Program <- as.numeric(unlist(df$Days_in_Program))
 
 reg <- lm(Days_in_Program ~ ., data = df)
 summary(reg)
