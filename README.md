@@ -27,7 +27,7 @@ TEAM MAT
 2 - [X] Clean and process 
 3 - [X] EDA FTW
 5 - [X] Find solutions to HH business problems
-6 - [ ] Create visuals
+6 - [X] Create visuals
 7 - [ ] Format into a presentation.
 ```
 
