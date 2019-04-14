@@ -37,10 +37,12 @@ hired_corpus <- VCorpus(VectorSource(hired$Summary_of_Qualifications__c))
 #All text in lower case
 hired_corpus_clean <-tm_map(hired_corpus, content_transformer(tolower))
 #remove numbers
-#hired_corpus_clean <- tm_map(hired_corpus_clean, removeNumbers)
+hired_corpus_clean <- tm_map(hired_corpus_clean, removeNumbers)
 #remove stopwords
 hired_corpus_clean <- tm_map(hired_corpus_clean, removeWords, stopwords("en"))
-
+hired_corpus_clean <- tm_map(hired_corpus_clean, removeWords, c("security","possess", "operations","leadership",
+                                                                "experience","multiple", "management","united",
+                                                                "states"))
 #remove punctuation and special characters 
 hired_corpus_clean <- tm_map(hired_corpus_clean,removePunctuation)
 #Remove whitespace
@@ -59,9 +61,9 @@ head(d, 10)
 
 #Word cloud Hired
 set.seed(1234)
-wordcloud(words = d$word, freq = d$freq, min.freq = 1,
-          max.words=100, random.order=FALSE, scale = c(3, 0.1),rot.per=0.35, 
-          colors=brewer.pal(8, "Dark2"))
+wordcloud(words = d$word, freq = d$freq, min.freq = 0.5,
+          max.words=100, random.order=FALSE, scale = c(3, 0.1), 
+          colors=brewer.pal(8, "Accent"))
 
 
 #Word Frequency for words occuring at least 4 times
@@ -91,7 +93,9 @@ Nhired_corpus_clean <- tm_map(Nhired_corpus_clean, removeNumbers)
 #remove stopwords
 Nhired_corpus_clean <- tm_map(Nhired_corpus_clean, removeWords, stopwords())
 #remove management
-#Nhired_corpus_clean <- tm_map(Nhired_corpus_clean, removeWords, c("military", "management","and", "the", "while"))
+Nhired_corpus_clean <- tm_map(Nhired_corpus_clean, removeWords, c("security","possess", "operations","leadership",
+                                                                  "experience","multiple", "management","united",
+                                                                  "states"))
 #remove punctuation and special characters 
 Nhired_corpus_clean <- tm_map(Nhired_corpus_clean,removePunctuation)
 #Remove whitespace
@@ -111,9 +115,9 @@ head(d_nh, 10)
 
 #Word cloud Not Hired
 set.seed(1234)
-wordcloud(words = d$word, freq = Nd$freq, min.freq = 10,
-          max.words=100, random.order=FALSE, scale = c(3, 0.1),rot.per=0.35, 
-          colors=brewer.pal(8, "Dark2"))
+wordcloud(words = d_nh$word, freq = d_nh$freq, min.freq = 0.5,
+          max.words=100, random.order=FALSE, scale = c(3, 0.1), 
+          colors=brewer.pal(8, "Accent"))
 
 
 #Word Frequency for words occuring at least 4 times
