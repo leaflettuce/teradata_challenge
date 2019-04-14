@@ -33,7 +33,19 @@ df.head()
 ###########################################################
 
 # set skills'
-skills = ['military','program','analyst','security']
+skills = ['military','program','analyst','security', 'career', 'veteran', 'risk',
+          'comprehensive', 'managed', 'performance', 'clearance', 'results', 'senior',
+          'army', 'teams', 'secret', 'awards', 'training', 'years', 'global', 'meeting', 
+          'science', 'bachelor', 'professional', 'manager', 'business', 'logistics', 'project',
+          'technical', 'planning', 'service', 'information', 'fastpaced', 'maintenance', 'operational', 
+          'diverse', 'airforce', 'navy', 'marines', 'stategic', 'systems', 'programming', 'cultural', 
+          'certifications', 'defense', 'collaborating', 'analysis', 'steward', 'process', 'network', 
+          'associate', 'tactical', 'medical', 'safety', 'organizational', 'university', 'intelligence',
+          'administrative', 'data', 'medal', 'control', 'inventory', 'employees', 'private', 'bechelors', 
+          'masters', 'criminal', 'health', 'sales', 'transportation', 'budget', 'services', 'engineering', 
+          'public', 'guard', 'accountability', 'computer', 'justice', 'financial', 'developing', 
+          'policy', 'maintained', 'law', 'technician', 'supervised', 'leader', 'marketing', 'worldwide',
+          'officer', 'accounting', 'lean', 'sigma', 'comptai', 'repair', 'electronic', 'coordinated']
 
 # iterate through qualifications and track skills
 skills_dictionary = {}
