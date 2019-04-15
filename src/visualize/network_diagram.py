@@ -42,7 +42,7 @@ skills = ['military','program','analyst','security', 'career', 'veteran', 'risk'
           'certifications', 'defense', 'collaborating', 'analysis', 'steward', 'process', 'network', 
           'associate', 'tactical', 'medical', 'safety', 'organizational', 'university', 'intelligence',
           'administrative', 'data', 'medal', 'control', 'inventory', 'employees', 'private', 'bechelors', 
-          'masters', 'criminal', 'health', 'sales', 'transportation', 'budget', 'services', 'engineering', 
+          'masters', 'health', 'sales', 'transportation', 'budget', 'services', 'engineering', 
           'public', 'guard', 'accountability', 'computer', 'justice', 'financial', 'developing', 
           'policy', 'maintained', 'law', 'technician', 'supervised', 'leader', 'marketing', 'worldwide',
           'officer', 'accounting', 'lean', 'sigma', 'comptai', 'repair', 'electronic', 'coordinated']
@@ -104,10 +104,15 @@ for i in updated_edge_list:
         updated_edge_list.remove(i)
         
         
-############### AESTETICS
+###############                         AESTETICS
     #############
         #############    
-        
+            #############
+        #########
+    ##########
+###############
+    
+    
 #set canvas size
 plt.subplots(figsize=(12.5,12.5))
 
@@ -123,20 +128,19 @@ G.add_weighted_edges_from(updated_edge_list)
 
 #manually copy and pasted the node order using 'nx.nodes(G)'
 #Couldn't determine another route to listing out the order of nodes for future work
-node_order = ['justice', 'meeting', 'global', 'operational', 'information', 'maintained', 
-              'developing', 'sigma', 'employees', 'analyst', 'veteran', 'service', 'services', 
-              'maintenance', 'navy', 'university', 'planning', 'electronic', 'manager', 
-              'military', 'bachelor', 'health', 'intelligence', 'masters', 'collaborating', 
-              'guard', 'accounting', 'coordinated', 'tactical', 'steward', 'teams', 'professional', 
-              'cultural', 'senior', 'sales', 'training', 'secret', 'technician', 'public', 'analysis', 
-              'performance', 'diverse', 'budget', 'officer', 'repair', 'associate', 'policy', 
-              'financial', 'airforce', 'organizational', 'program', 'managed', 'worldwide', 
-              'process', 'clearance', 'medal', 'inventory', 'marines', 'control', 'technical', 
-              'engineering', 'business', 'awards', 'medical', 'law', 'safety', 'programming', 
-              'computer', 'lean', 'systems', 'comprehensive', 'private', 'logistics', 'security', 
-              'results', 'army', 'data', 'accountability', 'defense', 'supervised', 'certifications', 
-              'leader', 'transportation', 'criminal', 'years', 'network', 'science', 'career', 'fastpaced', 
-              'marketing', 'project', 'administrative', 'risk']
+node_order = ['leader', 'medal', 'administrative', 'programming', 'electronic', 'employees', 
+              'private', 'transportation', 'teams', 'risk', 'information', 'officer', 'defense', 
+              'business', 'collaborating', 'planning', 'services', 'army', 'guard', 'accountability', 
+              'results', 'clearance', 'military', 'bachelor', 'senior', 'technical', 'analysis', 
+              'medical', 'certifications', 'veteran', 'training', 'budget', 'computer', 'developing', 
+              'lean', 'inventory', 'career', 'intelligence', 'navy', 'coordinated', 'systems', 'safety', 
+              'operational', 'comprehensive', 'worldwide', 'science', 'public', 'steward', 'global', 
+              'sigma', 'tactical', 'control', 'meeting', 'program', 'maintained', 'associate', 'financial', 
+              'managed', 'engineering', 'maintenance', 'fastpaced', 'technician', 'supervised', 'manager', 
+              'secret', 'performance', 'marketing', 'security', 'policy', 'diverse', 'health', 'cultural', 
+              'organizational', 'service', 'analyst', 'airforce', 'repair', 'marines', 'university', 'awards', 
+              'process', 'data', 'masters', 'project', 'years', 'professional', 'network', 'justice', 'sales', 
+              'law', 'logistics', 'accounting']
              
 
 #reorder node list
