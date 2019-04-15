@@ -109,7 +109,7 @@ for i in updated_edge_list:
         #############    
         
 #set canvas size
-plt.subplots(figsize=(15,18))
+plt.subplots(figsize=(12.5,12.5))
 
 #networkx graph time!
 G = nx.Graph()
@@ -123,20 +123,20 @@ G.add_weighted_edges_from(updated_edge_list)
 
 #manually copy and pasted the node order using 'nx.nodes(G)'
 #Couldn't determine another route to listing out the order of nodes for future work
-node_order = ['comprehensive', 'airforce', 'logistics',  'career', 'maintenance', 
-              'criminal', 'bachelor', 'clearance', 'supervised', 'security', 'managed',
-              'financial', 'maintained', 'program', 'justice', 'coordinated', 'veteran',
-              'marketing', 'developing', 'defense', 'meeting', 'medal' ,'information',
-              'budget', 'cultural', 'manager', 'intelligence', 'risk', 'accounting', 
-              'university', 'medical', 'organizational', 'military', 'operational', 'public',
-              'accountability', 'worldwide', 'process', 'global',  'private', 'diverse', 
-              'repair', 'health', 'law', 'project', 'fastpaced', 'policy', 'engineering',
-              'masters', 'network', 'collaborating', 'services', 'technician', 'electronic',
-              'professional', 'inventory', 'data', 'results', 'science', 'computer', 'certifications', 
-              'planning', 'senior', 'business', 'programming', 'marines', 'leader', 'performance', 
-              'associates', 'transportation', 'control', 'navy', 'employees', 'sales', 'services', 'administrative',
-              'secret', 'tactical', 'officer', 'analysis', 'years', 'teams', 'steward', 'guard', 'safety', 
-              'lean', 'systems']
+node_order = ['justice', 'meeting', 'global', 'operational', 'information', 'maintained', 
+              'developing', 'sigma', 'employees', 'analyst', 'veteran', 'service', 'services', 
+              'maintenance', 'navy', 'university', 'planning', 'electronic', 'manager', 
+              'military', 'bachelor', 'health', 'intelligence', 'masters', 'collaborating', 
+              'guard', 'accounting', 'coordinated', 'tactical', 'steward', 'teams', 'professional', 
+              'cultural', 'senior', 'sales', 'training', 'secret', 'technician', 'public', 'analysis', 
+              'performance', 'diverse', 'budget', 'officer', 'repair', 'associate', 'policy', 
+              'financial', 'airforce', 'organizational', 'program', 'managed', 'worldwide', 
+              'process', 'clearance', 'medal', 'inventory', 'marines', 'control', 'technical', 
+              'engineering', 'business', 'awards', 'medical', 'law', 'safety', 'programming', 
+              'computer', 'lean', 'systems', 'comprehensive', 'private', 'logistics', 'security', 
+              'results', 'army', 'data', 'accountability', 'defense', 'supervised', 'certifications', 
+              'leader', 'transportation', 'criminal', 'years', 'network', 'science', 'career', 'fastpaced', 
+              'marketing', 'project', 'administrative', 'risk']
              
 
 #reorder node list
@@ -155,16 +155,16 @@ for i in nx.edges(G):
             updated_again_edges.append(test[x])
             
 #drawing custimization
-node_scalar = .05
-edge_scalar = .00025
+node_scalar = .06
+edge_scalar = .00032
 sizes = [x[1]*node_scalar for x in updated_node_order]
 widths = [x*edge_scalar for x in updated_again_edges]
 
 #draw the graph
-pos = nx.spring_layout(G, k=13, iterations=1)
+pos = nx.spring_layout(G, k=25, iterations=1)
 
 nx.draw(G, pos, with_labels=True, font_size = 9, font_weight='bold', edge_color='grey',
-        node_size = sizes, width = widths, node_color= '#A0CBE2')
+        node_size = sizes, width = widths, node_color= '#6592B2')
 
 plt.axis('off')
-plt.savefig("hired_network.png") # save as png
+plt.savefig("hired_network_4.png") # save as png
