@@ -165,10 +165,10 @@ sizes = [x[1]*node_scalar for x in updated_node_order]
 widths = [x*edge_scalar for x in updated_again_edges]
 
 #draw the graph
-pos = nx.spring_layout(G, k=25, iterations=1)
+pos = nx.spring_layout(G, k=15, iterations=22)
 
 nx.draw(G, pos, with_labels=True, font_size = 9, font_weight='bold', edge_color='grey',
         node_size = sizes, width = widths, node_color= '#6592B2')
 
 plt.axis('off')
-plt.savefig("hired_network_4.png") # save as png
+plt.savefig("hired_network_6.png") # save as png
