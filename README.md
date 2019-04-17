@@ -28,7 +28,7 @@ TEAM MAT
 3 - [X] EDA FTW
 5 - [X] Find solutions to HH business problems
 6 - [X] Create visuals
-7 - [ ] Format into a presentation.
+7 - [X] Format into a presentation.
 ```
 
 ## Loading Data
