@@ -10,7 +10,7 @@ be necessary components to succeed in this goal.
 
 ## Business Questions
 ```
-TEAM CAC
+TEAM CAC (Data Snhupers)
 - Is there anything in the client's demographic profile that indicates that a client is more likely to become a confirmed 
   hire or any other outcome?
 - What can we prove - quantitatively - that our volunteers are increasing the overall effectiveness of our program?
@@ -45,4 +45,19 @@ TEAM MAT
 (3) RUN /src.process/create_era.bat
 	|--> Give time to run. Can take up to 20 minutes.
 	|--> Only run if you need this variable for analysis.
+```
+
+## Results
+ 
+```
+
+o - Identified inequalities among demographics within HH USA hiring success rates.
+o - Identified differences between time in program based on client type and demographics.
+o - Highlighted challenges which HH USA faces within their program.
+o - Quantified benefits and effectiveness of Volunteer Services to HH USA program.
+o - Performed Qualification Keyword Analysis to suggest words to include within client resumes.
+o - Leveraged State Job Growth and Unemployment Rates data to suggest a path to increasing success of program.
+o - Created Logistic Regression successfully classifying clients as successful or not at 70% accuracy.
+o - Standardized co-efficients of this model to identify most important factors contributing to client success. 
+o - Formed final PP presentation to convey these findings in an interesting and informative manner.
 ```
